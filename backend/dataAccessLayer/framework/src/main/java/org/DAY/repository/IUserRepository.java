@@ -7,19 +7,13 @@
  * agreement/contract under which the software has been supplied.               *
  ********************************************************************************/
 
-package utility;
+package org.DAY.repository;
+
+import org.DAY.db.entity.UserEntity;
+import org.springframework.data.repository.CrudRepository;
 
 /**
- * Created by 204048703 on 11/27/2017.
+ * Created by 204048703 on 11/28/2017.
  */
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class Hello {
-    public static void main(String[] args) {
-        SpringApplication.run(Hello.class, args);
-    }
-
+public interface IUserRepository extends CrudRepository<UserEntity, String>{
 }

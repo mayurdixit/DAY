@@ -7,13 +7,21 @@
  * agreement/contract under which the software has been supplied.               *
  ********************************************************************************/
 
-package org.DAY.repository;
+package org.DAY.controller;
 
-import org.DAY.db.entity.User;
-import org.springframework.data.repository.CrudRepository;
+import java.util.Date;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by 204048703 on 11/28/2017.
  */
-public interface IUserRepository extends CrudRepository<User, String>{
+
+@RestController
+public class MainController {
+    @RequestMapping("/")
+    public String hello(){
+        return "Home" + new Date();
+    }
 }

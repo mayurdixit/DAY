@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.DAY.db.entity.UserEntity;
+import org.DAY.db.entity.User;
 import org.DAY.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,17 +27,17 @@ public class UserService {
     @Autowired
     private IUserRepository userRepository;
 
-    public List<UserEntity> getAllUsers(){
-        List<UserEntity> userRecords = new ArrayList<>();
+    public List<User> getAllUsers(){
+        List<User> userRecords = new ArrayList<>();
         userRepository.findAll().forEach(userRecords::add);
         return userRecords;
     }
 
-    public Optional<UserEntity> getUser(String id){
+    public Optional<User> getUser(String id){
         return userRepository.findById(id);
     }
 
-    public void addUser(UserEntity userRecord){
+    public void addUser(User userRecord){
         userRepository.save(userRecord);
     }
 

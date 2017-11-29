@@ -7,21 +7,15 @@
  * agreement/contract under which the software has been supplied.               *
  ********************************************************************************/
 
-package org.DAY.framework;
+package org.DAY;
 
-import java.util.Date;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+@SpringBootApplication
+public class FrameworkApplication {
 
-/**
- * Created by 204048703 on 11/28/2017.
- */
-
-@RestController
-public class MainController {
-    @RequestMapping("/")
-    public String hello(){
-        return "Home" + new Date();
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(FrameworkApplication.class, args);
+	}
 }

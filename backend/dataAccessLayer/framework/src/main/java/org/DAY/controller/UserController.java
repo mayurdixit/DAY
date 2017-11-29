@@ -12,7 +12,7 @@ package org.DAY.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.DAY.db.entity.UserEntity;
+import org.DAY.db.entity.User;
 import org.DAY.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,17 +31,17 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/user")
-    public List<UserEntity> getAllUser(){
+    public List<User> getAllUser(){
         return userService.getAllUsers();
     }
 
     @RequestMapping(value="/add-user", method= RequestMethod.POST)
-    public void addUser(@RequestBody UserEntity userRecord){
+    public void addUser(@RequestBody User userRecord){
         userService.addUser(userRecord);
     }
 
     @RequestMapping(value="/user/{id}", method=RequestMethod.GET)
-    public Optional<UserEntity> getUser(@PathVariable String id){
+    public Optional<User> getUser(@PathVariable String id){
         return userService.getUser(id);
     }
 }

@@ -11,13 +11,15 @@ package org.DAY.db.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by 204048703 on 11/28/2017.
  */
 
 @Entity
-public class UserEntity {
+@Table(name="user", schema="dev")
+public class User {
     @Id
     private int id;
     private String name;
@@ -49,7 +51,7 @@ public class UserEntity {
 
     @Override
     public String toString() {
-        return "UserEntity{" +
+        return "User{" +
             "id=" + id +
             ", name='" + name + '\'' +
             ", email='" + email + '\'' +

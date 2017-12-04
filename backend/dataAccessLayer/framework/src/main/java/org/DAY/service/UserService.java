@@ -13,8 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.DAY.db.entity.User;
 import org.DAY.repository.IUserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +30,8 @@ public class UserService {
     @Autowired
     private IUserRepository userRepository;
 
+    private static Logger log = LoggerFactory.getLogger(UserService.class);
+
     public List<User> getAllUsers(){
         List<User> userRecords = new ArrayList<>();
         userRepository.findAll().forEach(userRecords::add);
@@ -34,7 +39,8 @@ public class UserService {
     }
 
     public Optional<User> getUser(String id){
-        return userRepository.findById(id);
+        int intId = Integer.parseInt(id);
+        return userRepository.findById(intId);
     }
 
     public void addUser(User userRecord){
@@ -42,6 +48,20 @@ public class UserService {
     }
 
     public void delete(String id) {
-        userRepository.deleteById(id);
+        System.out.println("id=" + id);
+        int intId = Integer.parseInt(id);
+        userRepository.deleteById(intId);
+    }
+
+    public Optional<User> getUserInfo(String userName){
+        Optional<User> retOptional;
+        System.out.println("userName= " + userName);
+        User user = userRepository.findByUserName(userName);
+        if(user != null) {
+           retOptional = Optional.of(user);
+        } else {
+            retOptional = Optional.empty();
+        }
+        return retOptional;
     }
 }

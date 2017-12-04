@@ -7,19 +7,28 @@
  * agreement/contract under which the software has been supplied.               *
  ********************************************************************************/
 
-package org.DAY.repository;
+package org.DAY.service;
 
-import org.DAY.db.entity.User;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
+import java.util.List;
+import java.util.Optional;
+
+import org.DAY.db.entity.KendraInfo;
+import org.DAY.repository.IKendraInfoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * Created by 204048703 on 11/28/2017.
+ * Created by 204048703 on 12/4/2017.
  */
-public interface IUserRepository extends CrudRepository<User, Integer>{
 
-    @Query("SELECT u FROM User u WHERE u.user_name = :userName")
-    User findByUserName(@Param("userName") String userName);
+@Service
+public class KendraInfoService {
+
+    @Autowired
+    IKendraInfoRepository kendraInfoRepository;
+
+    public Optional<List<KendraInfo>> getAllKendra(int userId){
+        List<KendraInfo> allKendraInfo;
+        kendraInfoRepository.findAll().forEach();
+    }
 }

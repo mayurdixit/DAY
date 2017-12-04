@@ -1,0 +1,304 @@
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    0.0.0.0:135            t10047142:0            LISTENING
+  RpcSs
+ [svchost.exe]
+  TCP    0.0.0.0:445            t10047142:0            LISTENING
+ Can not obtain ownership information
+  TCP    0.0.0.0:3389           t10047142:0            LISTENING
+  CryptSvc
+ [svchost.exe]
+  TCP    0.0.0.0:5357           t10047142:0            LISTENING
+ Can not obtain ownership information
+  TCP    0.0.0.0:5432           t10047142:0            LISTENING
+ [postgres.exe]
+  TCP    0.0.0.0:8081           t10047142:0            LISTENING
+ [macmnsvc.exe]
+  TCP    0.0.0.0:8888           t10047142:0            LISTENING
+ [java.exe]
+  TCP    0.0.0.0:26861          t10047142:0            LISTENING
+ [java.exe]
+  TCP    0.0.0.0:49152          t10047142:0            LISTENING
+ [wininit.exe]
+  TCP    0.0.0.0:49153          t10047142:0            LISTENING
+  eventlog
+ [svchost.exe]
+  TCP    0.0.0.0:49154          t10047142:0            LISTENING
+ [lsass.exe]
+  TCP    0.0.0.0:49155          t10047142:0            LISTENING
+  Schedule
+ [svchost.exe]
+  TCP    0.0.0.0:54305          t10047142:0            LISTENING
+ [spoolsv.exe]
+  TCP    0.0.0.0:54306          t10047142:0            LISTENING
+ [services.exe]
+  TCP    0.0.0.0:54309          t10047142:0            LISTENING
+  PolicyAgent
+ [svchost.exe]
+  TCP    0.0.0.0:57596          t10047142:0            LISTENING
+ [java.exe]
+  TCP    0.0.0.0:57597          t10047142:0            LISTENING
+ [idea64.exe]
+  TCP    3.75.125.100:139       t10047142:0            LISTENING
+ Can not obtain ownership information
+  TCP    3.75.125.100:50308     3.159.212.220:2004     ESTABLISHED
+ [OUTLOOK.EXE]
+  TCP    3.75.125.100:52967     10.114.23.200:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:56849     3.39.86.231:8080       CLOSE_WAIT
+ [CiscoJabber.exe]
+  TCP    3.75.125.100:56850     10.114.23.200:http     CLOSE_WAIT
+ [CiscoJabber.exe]
+  TCP    3.75.125.100:56866     52.112.67.92:https     ESTABLISHED
+ [lync.exe]
+  TCP    3.75.125.100:58541     10.114.23.201:http     CLOSE_WAIT
+ [chrome.exe]
+  TCP    3.75.125.100:59377     10.114.23.200:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:60378     10.114.23.201:http     CLOSE_WAIT
+ [chrome.exe]
+  TCP    3.75.125.100:60382     10.114.23.201:http     CLOSE_WAIT
+ [chrome.exe]
+  TCP    3.75.125.100:60384     10.114.23.201:http     CLOSE_WAIT
+ [chrome.exe]
+  TCP    3.75.125.100:60385     10.114.23.201:http     CLOSE_WAIT
+ [chrome.exe]
+  TCP    3.75.125.100:60386     10.114.23.201:http     CLOSE_WAIT
+ [chrome.exe]
+  TCP    3.75.125.100:61394     3.184.45.115:http      CLOSE_WAIT
+ [Code.exe]
+  TCP    3.75.125.100:62075     10.114.23.200:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:62363     3.202.189.105:https    ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:62495     10.114.23.200:http     CLOSE_WAIT
+ [chrome.exe]
+  TCP    3.75.125.100:62590     10.114.23.200:http     CLOSE_WAIT
+ [chrome.exe]
+  TCP    3.75.125.100:62794     3.159.212.220:2003     ESTABLISHED
+ [OUTLOOK.EXE]
+  TCP    3.75.125.100:62799     3.159.212.220:2003     ESTABLISHED
+ [OUTLOOK.EXE]
+  TCP    3.75.125.100:63037     10.114.23.201:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:63072     10.114.23.201:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:63151     10.114.23.200:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:63152     10.114.23.200:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:63153     10.114.23.200:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:63154     10.114.23.200:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:63155     10.114.23.200:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:63156     10.114.23.200:http     ESTABLISHED
+ [chrome.exe]
+  TCP    3.75.125.100:63195     dlpenergy:59000        ESTABLISHED
+ Can not obtain ownership information
+  TCP    3.75.125.100:63265     3.159.212.220:2004     ESTABLISHED
+ [UcMapi.exe]
+  TCP    3.75.125.100:64319     3.159.212.63:2003      ESTABLISHED
+ [OUTLOOK.EXE]
+  TCP    3.75.125.100:64943     3.159.212.220:2004     ESTABLISHED
+ [lync.exe]
+  TCP    127.0.0.1:5354         t10047142:0            LISTENING
+ [mDNSResponder.exe]
+  TCP    127.0.0.1:5354         t10047142:54293        ESTABLISHED
+ [mDNSResponder.exe]
+  TCP    127.0.0.1:5354         t10047142:54294        ESTABLISHED
+ [mDNSResponder.exe]
+  TCP    127.0.0.1:6942         t10047142:0            LISTENING
+ [idea64.exe]
+  TCP    127.0.0.1:27015        t10047142:0            LISTENING
+ [AppleMobileDeviceService.exe]
+  TCP    127.0.0.1:27015        t10047142:56791        ESTABLISHED
+ [AppleMobileDeviceService.exe]
+  TCP    127.0.0.1:54293        t10047142:5354         ESTABLISHED
+ [AppleMobileDeviceService.exe]
+  TCP    127.0.0.1:54294        t10047142:5354         ESTABLISHED
+ [AppleMobileDeviceService.exe]
+  TCP    127.0.0.1:56791        t10047142:27015        ESTABLISHED
+ [iTunesHelper.exe]
+  TCP    127.0.0.1:57413        t10047142:57414        ESTABLISHED
+ [idea64.exe]
+  TCP    127.0.0.1:57414        t10047142:57413        ESTABLISHED
+ [idea64.exe]
+  TCP    127.0.0.1:57597        t10047142:63133        ESTABLISHED
+ [idea64.exe]
+  TCP    127.0.0.1:59556        t10047142:59557        ESTABLISHED
+ [java.exe]
+  TCP    127.0.0.1:59557        t10047142:59556        ESTABLISHED
+ [java.exe]
+  TCP    127.0.0.1:59558        t10047142:59559        ESTABLISHED
+ [java.exe]
+  TCP    127.0.0.1:59559        t10047142:59558        ESTABLISHED
+ [java.exe]
+  TCP    127.0.0.1:59560        t10047142:59561        ESTABLISHED
+ [java.exe]
+  TCP    127.0.0.1:59561        t10047142:59560        ESTABLISHED
+ [java.exe]
+  TCP    127.0.0.1:61540        t10047142:0            LISTENING
+ [pgAdmin4.exe]
+  TCP    127.0.0.1:61540        t10047142:63106        TIME_WAIT
+  TCP    127.0.0.1:62998        t10047142:57597        TIME_WAIT
+  TCP    127.0.0.1:63039        t10047142:57597        TIME_WAIT
+  TCP    127.0.0.1:63085        t10047142:57597        TIME_WAIT
+  TCP    127.0.0.1:63133        t10047142:57597        ESTABLISHED
+ [java.exe]
+  TCP    127.0.0.1:63134        t10047142:57597        TIME_WAIT
+  TCP    127.0.0.1:63137        t10047142:57596        TIME_WAIT
+  TCP    127.0.0.1:63342        t10047142:0            LISTENING
+ [idea64.exe]
+  TCP    [::]:135               t10047142:0            LISTENING
+  RpcSs
+ [svchost.exe]
+  TCP    [::]:445               t10047142:0            LISTENING
+ Can not obtain ownership information
+  TCP    [::]:3389              t10047142:0            LISTENING
+  CryptSvc
+ [svchost.exe]
+  TCP    [::]:5357              t10047142:0            LISTENING
+ Can not obtain ownership information
+  TCP    [::]:5432              t10047142:0            LISTENING
+ [postgres.exe]
+  TCP    [::]:8081              t10047142:0            LISTENING
+ [macmnsvc.exe]
+  TCP    [::]:8888              t10047142:0            LISTENING
+ [java.exe]
+  TCP    [::]:26861             t10047142:0            LISTENING
+ [java.exe]
+  TCP    [::]:49152             t10047142:0            LISTENING
+ [wininit.exe]
+  TCP    [::]:49153             t10047142:0            LISTENING
+  eventlog
+ [svchost.exe]
+  TCP    [::]:49154             t10047142:0            LISTENING
+ [lsass.exe]
+  TCP    [::]:49155             t10047142:0            LISTENING
+  Schedule
+ [svchost.exe]
+  TCP    [::]:54305             t10047142:0            LISTENING
+ [spoolsv.exe]
+  TCP    [::]:54306             t10047142:0            LISTENING
+ [services.exe]
+  TCP    [::]:54309             t10047142:0            LISTENING
+  PolicyAgent
+ [svchost.exe]
+  TCP    [::]:57596             t10047142:0            LISTENING
+ [java.exe]
+  TCP    [::1]:63251            t10047142:9229         SYN_SENT
+ [chrome.exe]
+  TCP    [::1]:63252            t10047142:9229         SYN_SENT
+ [chrome.exe]
+  UDP    0.0.0.0:123            *:*                    
+  W32Time
+ [svchost.exe]
+  UDP    0.0.0.0:500            *:*                    
+  IKEEXT
+ [svchost.exe]
+  UDP    0.0.0.0:3702           *:*                    
+  FDResPub
+ [svchost.exe]
+  UDP    0.0.0.0:3702           *:*                    
+  FDResPub
+ [svchost.exe]
+  UDP    0.0.0.0:4500           *:*                    
+  IKEEXT
+ [svchost.exe]
+  UDP    0.0.0.0:5353           *:*                    
+ [chrome.exe]
+  UDP    0.0.0.0:5355           *:*                    
+  Dnscache
+ [svchost.exe]
+  UDP    0.0.0.0:8082           *:*                    
+ [macmnsvc.exe]
+  UDP    0.0.0.0:49675          *:*                    
+ [mDNSResponder.exe]
+  UDP    0.0.0.0:49677          *:*                    
+  FDResPub
+ [svchost.exe]
+  UDP    0.0.0.0:63388          *:*                    
+ [spoolsv.exe]
+  UDP    3.75.125.100:137       *:*                    
+ Can not obtain ownership information
+  UDP    3.75.125.100:138       *:*                    
+ Can not obtain ownership information
+  UDP    3.75.125.100:1900      *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    3.75.125.100:2177      *:*                    
+  QWAVE
+ [svchost.exe]
+  UDP    3.75.125.100:5353      *:*                    
+ [mDNSResponder.exe]
+  UDP    3.75.125.100:49763     *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    127.0.0.1:1900         *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    127.0.0.1:49764        *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    127.0.0.1:50440        *:*                    
+ [UcMapi.exe]
+  UDP    127.0.0.1:51059        *:*                    
+ [wmiprvse.exe]
+  UDP    127.0.0.1:56761        *:*                    
+  NlaSvc
+ [svchost.exe]
+  UDP    127.0.0.1:57380        *:*                    
+ [iTunesHelper.exe]
+  UDP    127.0.0.1:57381        *:*                    
+ [iTunesHelper.exe]
+  UDP    127.0.0.1:60214        *:*                    
+ [lync.exe]
+  UDP    127.0.0.1:61430        *:*                    
+ [chrome.exe]
+  UDP    127.0.0.1:62290        *:*                    
+ [lsass.exe]
+  UDP    127.0.0.1:63563        *:*                    
+ [postgres.exe]
+  UDP    127.0.0.1:64639        *:*                    
+ [AppleMobileDeviceService.exe]
+  UDP    127.0.0.1:64640        *:*                    
+ [AppleMobileDeviceService.exe]
+  UDP    127.0.0.1:64756        *:*                    
+  gpsvc
+ [svchost.exe]
+  UDP    127.0.0.1:65408        *:*                    
+ [OUTLOOK.EXE]
+  UDP    [::]:123               *:*                    
+  W32Time
+ [svchost.exe]
+  UDP    [::]:500               *:*                    
+  IKEEXT
+ [svchost.exe]
+  UDP    [::]:3702              *:*                    
+  FDResPub
+ [svchost.exe]
+  UDP    [::]:3702              *:*                    
+  FDResPub
+ [svchost.exe]
+  UDP    [::]:4500              *:*                    
+  IKEEXT
+ [svchost.exe]
+  UDP    [::]:8082              *:*                    
+ [macmnsvc.exe]
+  UDP    [::]:49676             *:*                    
+ [mDNSResponder.exe]
+  UDP    [::]:49678             *:*                    
+  FDResPub
+ [svchost.exe]
+  UDP    [::1]:1900             *:*                    
+  SSDPSRV
+ [svchost.exe]
+  UDP    [::1]:5353             *:*                    
+ [mDNSResponder.exe]
+  UDP    [::1]:49762            *:*                    
+  SSDPSRV
+ [svchost.exe]

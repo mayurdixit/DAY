@@ -22,8 +22,9 @@ export class LoginFormComponent implements OnInit {
     var password = ev.target.elements[1].value;
     console.log(username, password);
     if(username !== '' && password !== '') {
-      this.user.setUserLoggedIn();
+     // this.user.setUserLoggedIn();
       this.user.username = username;
+      this.user.authenticateUser(username);
       this.router.navigate(['dashboard']);
     }
     return false;

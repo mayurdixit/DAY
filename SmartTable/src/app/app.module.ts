@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 
 import { UserService } from './user.service';
 import { AuthguardGuard } from './authguard.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes =[
   {
@@ -46,6 +47,7 @@ const appRoutes: Routes =[
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [UserService, AuthguardGuard],
   bootstrap: [AppComponent]

@@ -44,4 +44,19 @@ public class UserController {
     public Optional<User> getUser(@PathVariable String id){
         return userService.getUser(id);
     }
+
+    @RequestMapping(value="/delete-user/{id}", method=RequestMethod.POST)
+    public void deleteUser(@PathVariable String id) {
+        userService.delete(id);
+    }
+
+    @RequestMapping(value="/authorize", method=RequestMethod.POST)
+    public User authorizeUser(@RequestBody String userName){
+        User retUser=null;
+        Optional optional = userService.getUserInfo(userName);
+        if(optional.isPresent()){
+            retUser = (User)optional.get();
+        }
+        return retUser;
+    }
 }

@@ -27,10 +27,10 @@ public class KendraInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int parent;
+    private Integer parent;
     private boolean active;
     private Date created_on;
-    private Date last_modified_on;
+    private Date last_updated_on;
 
     public int getId() {
         return id;
@@ -48,11 +48,11 @@ public class KendraInfo {
         this.name = name;
     }
 
-    public int getParent() {
+    public Integer getParent() {
         return parent;
     }
 
-    public void setParent(int parent) {
+    public void setParent(Integer parent) {
         this.parent = parent;
     }
 
@@ -72,12 +72,12 @@ public class KendraInfo {
         this.created_on = created_on;
     }
 
-    public Date getLast_modified_on() {
-        return last_modified_on;
+    public Date getLast_updated_on() {
+        return last_updated_on;
     }
 
-    public void setLast_modified_on(Date last_modified_on) {
-        this.last_modified_on = last_modified_on;
+    public void setLast_updated_on(Date last_updated_on) {
+        this.last_updated_on = last_updated_on;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class KendraInfo {
             ", parent=" + parent +
             ", active=" + active +
             ", created_on=" + created_on +
-            ", last_modified_on=" + last_modified_on +
+            ", last_updated_on=" + last_updated_on +
             '}';
     }
 }

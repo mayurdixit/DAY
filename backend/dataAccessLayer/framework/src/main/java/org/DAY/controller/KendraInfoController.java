@@ -15,6 +15,7 @@ import java.util.Optional;
 import org.DAY.db.entity.KendraInfo;
 import org.DAY.service.KendraInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,8 +31,19 @@ public class KendraInfoController {
     @Autowired
     KendraInfoService kendraInfoService;
 
-    @RequestMapping(value = "/getAllKendra", method = RequestMethod.GET)
-    public List<KendraInfo> getAllKendra(@RequestBody String userId) {
+    @RequestMapping(value = "/internal/getAllKendra", method = RequestMethod.GET)
+    public List<KendraInfo> getAllKendra() {
         return kendraInfoService.getAllKendra();
     }
+
+    @RequestMapping(value = "/internal/getKendra/{id}", method = RequestMethod.POST)
+    public Optional<KendraInfo> getKendra(@PathVariable String id){
+        return kendraInfoService.getKendraInfo(id);
+    }
+
+    @RequestMapping(value = "/internal/getChildKendra/{id}", method = RequestMethod.POST)
+    public List<KendraInfo> getChildKendra(@PathVariable String id){
+        return kendraInfoService.getChildKendraInfo(id);
+    }
+
 }

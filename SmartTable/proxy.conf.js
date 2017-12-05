@@ -5,6 +5,13 @@ const PROXY_CONFIG = [
         ],
         target: "http://localhost:8888",
         secure: false
+    },
+    {
+        context: [
+            "/internal"
+        ],
+        target: "http://localhost:8888",
+        secure: false
     }
 ]
 

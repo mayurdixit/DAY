@@ -7,19 +7,27 @@
  * agreement/contract under which the software has been supplied.               *
  ********************************************************************************/
 
-package org.DAY.repository;
+package org.DAY.db.entity;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.DAY.db.entity.KendraInfo;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
- * Created by 204048703 on 12/4/2017.
+ * Created by 204048703 on 12/5/2017.
  */
-public interface IKendraInfoRepository extends CrudRepository<KendraInfo, Integer> {
-    @Query("SELECT k FROM KendraInfo k WHERE k.parent = :id")
-    Iterable<KendraInfo> findByParent(int id);
+
+@Entity
+@Table(name="user_access_info", schema = "dev")
+public class UserAccessInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private Integer userId;
+    private Integer kendraId;
+    private Date createdOn;
+    private Date lastUpdatedOn;
 }

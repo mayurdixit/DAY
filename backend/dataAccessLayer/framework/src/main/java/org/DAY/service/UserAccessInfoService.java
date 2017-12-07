@@ -13,34 +13,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.DAY.db.entity.KendraInfo;
-import org.DAY.repository.IKendraInfoRepository;
+import org.DAY.db.entity.UserAccessInfo;
+import org.DAY.repository.IUserAccessInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by 204048703 on 12/4/2017.
+ * Created by 204048703 on 12/6/2017.
  */
-
 @Service
-public class KendraInfoService {
-
+public class UserAccessInfoService {
     @Autowired
-    IKendraInfoRepository kendraInfoRepository;
+    IUserAccessInfoRepository userAccessInfoRepository;
 
-    public List<KendraInfo> getAllKendra(){
-        List<KendraInfo> allKendraInfo = new ArrayList<>();
-        kendraInfoRepository.findAll().forEach(allKendraInfo::add);
-        return allKendraInfo;
+    public List<UserAccessInfo> getAllUserAccessInfo(){
+        List<UserAccessInfo> allUserAccessInfo = new ArrayList<>();
+        userAccessInfoRepository.findAll().forEach(allUserAccessInfo::add);
+        return allUserAccessInfo;
     }
 
-    public Optional<KendraInfo> getKendraInfo(int kendraId){
-        return kendraInfoRepository.findById(kendraId);
+    public Optional<UserAccessInfo> getUserAccessInfo(String id) {
+        int userAccessInfoId = Integer.parseInt(id);
+        return userAccessInfoRepository.findById(userAccessInfoId);
     }
 
-    public List<KendraInfo> getChildKendraInfo(int kendraId){
-        List<KendraInfo> childKendraInfo = new ArrayList<>();
-        kendraInfoRepository.findByParent(kendraId).forEach(childKendraInfo::add);
-        return childKendraInfo;
+    public Optional<UserAccessInfo> getUserAccessInfoForUser(int userId){
+        return userAccessInfoRepository.findByUserId(userId);
     }
 }

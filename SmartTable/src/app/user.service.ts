@@ -12,9 +12,10 @@ export class UserService {
 
   private isUserLoggedIn;
   public username;
+  private password;
 
   //private authenticateUserURL = 'http://localhost:8888/authorize';
-  private authenticateUserURL = "../authorize";
+  private authenticateUserURL = "../internal/authorize";
 
   constructor(private http: HttpClient) { 
     this.isUserLoggedIn = false;
@@ -28,16 +29,25 @@ export class UserService {
     return this.isUserLoggedIn;
   }
 
+  setPassword(passwd: String) {
+    this.password = passwd;
+  }
+
   authenticateUser(userdata: String){
     var data={};
    
-        console.log("In Authenticate User = " + userdata );
-    let headers = new HttpHeaders();
+    console.log("In Authenticate User = " + userdata );
     console.log("authenticateUserURL=" + this.authenticateUserURL);
+    
+    let headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', this.authenticateUserURL);
     headers.append('Access-Control-Allow-Credentials', 'true');
     headers.append('Content-type', 'application/json');
-    this.http.post(this.authenticateUserURL, this.username, {
+    
+    let requestBody = { "userName": this.username , "password":  this.password };
+    console.log("body=" + requestBody);
+
+    this.http.post(this.authenticateUserURL, requestBody, {
       headers: headers,
     })
     .toPromise()

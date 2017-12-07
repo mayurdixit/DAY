@@ -14,10 +14,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by 204048703 on 11/28/2017.
  */
+@Repository
 public interface IUserRepository extends CrudRepository<User, Integer>{
 
     @Query("SELECT u FROM User u WHERE u.user_name = :userName")

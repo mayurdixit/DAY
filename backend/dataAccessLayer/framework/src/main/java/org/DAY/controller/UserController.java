@@ -9,11 +9,17 @@
 
 package org.DAY.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.DAY.db.entity.KendraInfo;
 import org.DAY.db.entity.User;
+import org.DAY.db.entity.UserAccessInfo;
+import org.DAY.service.KendraInfoService;
+import org.DAY.service.UserAccessInfoService;
 import org.DAY.service.UserService;
+import org.DAY.utility.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +36,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/user")
+    @Autowired
+    private UserAccessInfoService userAccessInfoService;
+
+    @Autowired
+    private KendraInfoService kendraInfoService;
+
+    @RequestMapping("/internal/user")
     public List<User> getAllUser(){
         return userService.getAllUsers();
     }
@@ -40,7 +52,7 @@ public class UserController {
         userService.addUser(userRecord);
     }
 
-    @RequestMapping(value="/user/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/internal/user/{id}", method=RequestMethod.GET)
     public Optional<User> getUser(@PathVariable String id){
         return userService.getUser(id);
     }
@@ -50,13 +62,48 @@ public class UserController {
         userService.delete(id);
     }
 
-    @RequestMapping(value="/authorize", method=RequestMethod.POST)
-    public User authorizeUser(@RequestBody String userName){
-        User retUser=null;
-        Optional optional = userService.getUserInfo(userName);
-        if(optional.isPresent()){
-            retUser = (User)optional.get();
+    @RequestMapping(value="/internal/authorize", method=RequestMethod.POST)
+    public List<KendraInfo> authorizeUser(@RequestBody Login formData){
+        User retUser;
+        UserAccessInfo retUserAccessInfo;
+        List<KendraInfo> retKendraInfo = new ArrayList<>();
+
+        retUser = isUserHasAccess(formData);
+        if(retUser != null){
+            Optional userAccessInfoOprional = userAccessInfoService.getUserAccessInfoForUser(retUser.getId());
+            if(userAccessInfoOprional.isPresent()){
+                retUserAccessInfo = (UserAccessInfo)userAccessInfoOprional.get();
+                int kendraId = retUserAccessInfo.getKendraId();
+                List<KendraInfo> childKendraList = kendraInfoService.getChildKendraInfo(kendraId);
+                if(childKendraList.size() > 0) {
+                    retKendraInfo = childKendraList;
+                } else {
+                    retKendraInfo.add(getKendraInfo(kendraId));
+                }
+            }
         }
-        return retUser;
+        return retKendraInfo;
+    }
+
+    private User isUserHasAccess(Login data){
+        User validUser = null;
+        System.out.println("data=" + data);
+        Optional optional = userService.getUserInfo(data.getUserName());
+        if(optional.isPresent()){
+            validUser = (User)optional.get();
+            if(!data.getPassword().equals(validUser.getPassword())) {
+                validUser = null;
+            }
+        }
+        return validUser;
+    }
+
+    private KendraInfo getKendraInfo(int kendraId) {
+        KendraInfo kendraInfo=null;
+        Optional kendraInfoOptional = kendraInfoService.getKendraInfo(kendraId);
+        if (kendraInfoOptional.isPresent()){
+            kendraInfo = (KendraInfo) kendraInfoOptional.get();
+        }
+        return kendraInfo;
     }
 }

@@ -7,21 +7,36 @@
  * agreement/contract under which the software has been supplied.               *
  ********************************************************************************/
 
-package org.DAY.repository;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.DAY.db.entity.KendraInfo;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+package org.DAY.utility;
 
 /**
- * Created by 204048703 on 12/4/2017.
+ * Created by 204048703 on 12/6/2017.
  */
-@Repository
-public interface IKendraInfoRepository extends CrudRepository<KendraInfo, Integer> {
-    @Query("SELECT k FROM KendraInfo k WHERE k.parent = :id")
-    Iterable<KendraInfo> findByParent(int id);
+public class Login {
+    private String userName;
+    private String password;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Login{" +
+            "userName='" + userName + '\'' +
+            ", password='" + password + '\'' +
+            '}';
+    }
 }

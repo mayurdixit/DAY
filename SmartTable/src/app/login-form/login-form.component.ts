@@ -24,6 +24,7 @@ export class LoginFormComponent implements OnInit {
     if(username !== '' && password !== '') {
      // this.user.setUserLoggedIn();
       this.user.username = username;
+      this.user.setPassword(password);
       this.user.authenticateUser(username);
       this.router.navigate(['dashboard']);
     }

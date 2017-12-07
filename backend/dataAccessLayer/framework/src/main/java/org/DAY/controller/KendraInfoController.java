@@ -38,12 +38,14 @@ public class KendraInfoController {
 
     @RequestMapping(value = "/internal/getKendra/{id}", method = RequestMethod.POST)
     public Optional<KendraInfo> getKendra(@PathVariable String id){
-        return kendraInfoService.getKendraInfo(id);
+        int kendraId = Integer.parseInt(id);
+        return kendraInfoService.getKendraInfo(kendraId);
     }
 
     @RequestMapping(value = "/internal/getChildKendra/{id}", method = RequestMethod.POST)
     public List<KendraInfo> getChildKendra(@PathVariable String id){
-        return kendraInfoService.getChildKendraInfo(id);
+        int kendraId = Integer.parseInt(id);
+        return kendraInfoService.getChildKendraInfo(kendraId);
     }
 
 }

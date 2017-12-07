@@ -9,19 +9,18 @@
 
 package org.DAY.repository;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.DAY.db.entity.KendraInfo;
+import org.DAY.db.entity.UserAccessInfo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by 204048703 on 12/4/2017.
+ * Created by 204048703 on 12/6/2017.
  */
 @Repository
-public interface IKendraInfoRepository extends CrudRepository<KendraInfo, Integer> {
-    @Query("SELECT k FROM KendraInfo k WHERE k.parent = :id")
-    Iterable<KendraInfo> findByParent(int id);
+public interface IUserAccessInfoRepository extends CrudRepository<UserAccessInfo, Integer>{
+    @Query("SELECT ua FROM UserAccessInfo ua WHERE ua.userId = :id")
+    Optional<UserAccessInfo> findByUserId(int id);
 }

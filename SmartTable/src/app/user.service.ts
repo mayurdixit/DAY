@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 //return this.http.post('http://localhost:3000/adduser', JSON.stringify(data), options)
@@ -17,12 +18,12 @@ export class UserService {
   //private authenticateUserURL = 'http://localhost:8888/authorize';
   private authenticateUserURL = "../internal/authorize";
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private router:Router) { 
     this.isUserLoggedIn = false;
   }
 
-  setUserLoggedIn() {
-    this.isUserLoggedIn = true;
+  setUserLoggedIn(loggedIn: boolean) {
+    this.isUserLoggedIn = loggedIn;
   }
 
   getUserLoggedIn() {
@@ -39,6 +40,8 @@ export class UserService {
     console.log("In Authenticate User = " + userdata );
     console.log("authenticateUserURL=" + this.authenticateUserURL);
     
+    
+
     let headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', this.authenticateUserURL);
     headers.append('Access-Control-Allow-Credentials', 'true');
@@ -51,7 +54,18 @@ export class UserService {
       headers: headers,
     })
     .toPromise()
-    .then(response => console.log(response)) 
+    .then(response => {
+      console.log("response=" + response);
+      console.log("response lenght=" + (<any>response).length);
+      if((<any>response).length > 0) {
+        this.setUserLoggedIn(true);
+        this.router.navigate(['dashboard']);
+      } else {
+        this.setUserLoggedIn(false);
+      }
+      
+      
+    }) 
     .catch(this.handleError);
 }
 

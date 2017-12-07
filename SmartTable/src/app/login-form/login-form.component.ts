@@ -12,7 +12,7 @@ export class LoginFormComponent implements OnInit {
 
   constructor(private router:Router, private user:UserService) { }
 
-  ngOnInit() {
+  ngOnInit() {   
   }
 
   loginUser(ev) {
@@ -26,7 +26,7 @@ export class LoginFormComponent implements OnInit {
       this.user.username = username;
       this.user.setPassword(password);
       this.user.authenticateUser(username);
-      this.router.navigate(['dashboard']);
+      //this.router.navigate(['dashboard']);
     }
     return false;
   } 

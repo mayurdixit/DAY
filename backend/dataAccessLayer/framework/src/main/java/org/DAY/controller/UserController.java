@@ -19,6 +19,7 @@ import org.DAY.db.entity.UserAccessInfo;
 import org.DAY.service.KendraInfoService;
 import org.DAY.service.UserAccessInfoService;
 import org.DAY.service.UserService;
+import org.DAY.utility.ACLInfo;
 import org.DAY.utility.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,13 +64,17 @@ public class UserController {
     }
 
     @RequestMapping(value="/internal/authorize", method=RequestMethod.POST)
-    public List<KendraInfo> authorizeUser(@RequestBody Login formData){
+    public ACLInfo authorizeUser(@RequestBody Login formData){
         User retUser;
+        ACLInfo aclInfo = new ACLInfo();
         UserAccessInfo retUserAccessInfo;
         List<KendraInfo> retKendraInfo = new ArrayList<>();
+        KendraInfo parentKendraInfo;
+        int parentKendraId;
 
         retUser = isUserHasAccess(formData);
         if(retUser != null){
+            aclInfo.populateUserInfo(retUser);
             Optional userAccessInfoOprional = userAccessInfoService.getUserAccessInfoForUser(retUser.getId());
             if(userAccessInfoOprional.isPresent()){
                 retUserAccessInfo = (UserAccessInfo)userAccessInfoOprional.get();
@@ -77,12 +82,20 @@ public class UserController {
                 List<KendraInfo> childKendraList = kendraInfoService.getChildKendraInfo(kendraId);
                 if(childKendraList.size() > 0) {
                     retKendraInfo = childKendraList;
+                    parentKendraId = kendraId;
                 } else {
-                    retKendraInfo.add(getKendraInfo(kendraId));
+                    KendraInfo kendraInfo = getKendraInfo(kendraId);
+                    retKendraInfo.add(kendraInfo);
+                    parentKendraId = kendraInfo.getParent();
                 }
+
+                parentKendraInfo = getKendraInfo(parentKendraId);
+
+                aclInfo.setKendraInfoList(retKendraInfo);
+                aclInfo.setZoneInfo(parentKendraInfo);
             }
         }
-        return retKendraInfo;
+        return aclInfo;
     }
 
     private User isUserHasAccess(Login data){

@@ -14,12 +14,17 @@ export class UserService {
   private isUserLoggedIn;
   public username;
   private password;
+  private aclObj;
 
   //private authenticateUserURL = 'http://localhost:8888/authorize';
   private authenticateUserURL = "../internal/authorize";
 
   constructor(private http: HttpClient, private router:Router) { 
     this.isUserLoggedIn = false;
+  }
+
+  getKendraList(){
+    return this.aclObj.kendraInfoList;
   }
 
   setUserLoggedIn(loggedIn: boolean) {
@@ -56,9 +61,11 @@ export class UserService {
     .toPromise()
     .then(response => {
       console.log("response=" + response);
-      console.log("response lenght=" + (<any>response).length);
-      if((<any>response).length > 0) {
-        this.setUserLoggedIn(true);
+      this.aclObj = response;
+      let kendraList = this.getKendraList();
+      console.log("response lenght=" + kendraList.length);
+      if(kendraList.length > 0) {
+        this.setUserLoggedIn(true);        
         this.router.navigate(['dashboard']);
       } else {
         this.setUserLoggedIn(false);

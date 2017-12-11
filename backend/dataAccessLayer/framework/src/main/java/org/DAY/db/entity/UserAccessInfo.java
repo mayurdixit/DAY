@@ -21,7 +21,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="user_access_info", schema = "dev")
+@Table(name="user_access_info", schema = "parth_preeti")
 public class UserAccessInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

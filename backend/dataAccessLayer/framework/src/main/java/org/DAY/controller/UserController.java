@@ -48,7 +48,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @RequestMapping(value="/add-user", method= RequestMethod.POST)
+    @RequestMapping(value="/internal/add-user", method= RequestMethod.POST)
     public void addUser(@RequestBody User userRecord){
         userService.addUser(userRecord);
     }

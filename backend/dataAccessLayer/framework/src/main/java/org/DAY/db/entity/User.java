@@ -24,7 +24,7 @@ import org.hibernate.annotations.ColumnTransformer;
  */
 
 @Entity
-@Table(name="user", schema="dev")
+@Table(name="user", schema="parth_preeti")
 public class User {
 
 
@@ -33,7 +33,7 @@ public class User {
     private String contact_number;
     private boolean enabled;
     private Date created_on;
-    private Date last_modified_on;
+    private Date last_accessed_on;
     private String email;
     private String user_name;
     @ColumnTransformer(read = "pgp_sym_decrypt(password::bytea, 'mySecretKey')", write = "pgp_sym_encrypt(?, "
@@ -86,12 +86,12 @@ public class User {
         this.created_on = created_on;
     }
 
-    public Date getLast_modified_on() {
-        return last_modified_on;
+    public Date getLast_accessed_on() {
+        return last_accessed_on;
     }
 
-    public void setLast_modified_on(Date last_modified_on) {
-        this.last_modified_on = last_modified_on;
+    public void setLast_accessed_on(Date last_accessed_on) {
+        this.last_accessed_on = last_accessed_on;
     }
 
     public String getUser_name() {
@@ -144,7 +144,7 @@ public class User {
             ", contact_number='" + contact_number + '\'' +
             ", enabled=" + enabled +
             ", created_on=" + created_on +
-            ", last_modified_on=" + last_modified_on +
+            ", last_accessed_on=" + last_accessed_on +
             ", email='" + email + '\'' +
             ", user_name='" + user_name + '\'' +
             ", password='" + password + '\'' +

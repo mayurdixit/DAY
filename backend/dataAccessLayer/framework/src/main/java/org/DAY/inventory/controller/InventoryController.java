@@ -18,6 +18,7 @@ import org.DAY.inventory.entity.InventoryContact;
 import org.DAY.inventory.AddInventoryParam;
 import org.DAY.inventory.service.InventoryContactService;
 import org.DAY.inventory.service.InventoryService;
+import org.DAY.inventory.utility.InventoryData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,12 +62,16 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/internal/kendra_inventory/{id}", method = RequestMethod.GET)
-    public List<AddInventoryParam> getKendraInventory(@PathVariable String id){
-        List<AddInventoryParam> kendraInventory = new ArrayList<>();
+    public List<InventoryData> getKendraInventory(@PathVariable String id){
+        List<InventoryData> kendraInventory = new ArrayList<>();
         List<Inventory> inventoryList = inventoryService.getInventoryByKendra(id);
         inventoryList.forEach(inventory -> {
             List<InventoryContact> inventoryContactList = inventoryContactService.getInventoryContactByInventoryId
                 (inventory.getId());
+            InventoryData inventoryData = new InventoryData();
+            inventoryData.setInventory(inventory);
+            inventoryData.setContactList(inventoryContactList);
+            kendraInventory.add(inventoryData);
         });
         return kendraInventory;
     }

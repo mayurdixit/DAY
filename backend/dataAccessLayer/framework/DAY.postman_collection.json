@@ -1,0 +1,108 @@
+{
+	"variables": [],
+	"info": {
+		"name": "DAY",
+		"_postman_id": "db7b73b2-8843-4a21-571d-d9937b13b64f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Inventory",
+			"description": "",
+			"item": [
+				{
+					"name": "inventory-add",
+					"request": {
+						"url": "http://localhost:8888/internal/add_inventory",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\"inventoryName\": \"test-inventory\",\n\t\"inventorySerialNumber\": \"test-inventorySerialNumber\",\n\t\"inventoryInUse\": \"true\",\n\t\"inventoryPurchasedOn\": \"2017-12-10\",\n\t\"inventoryUsedSince\": \"2017-12-10\",\n\t\"inventoryStoredAt\": \"home\",\n\t\"inventoryComment\": \"No Comment\",\n\t\"inventoryUpdatedBy\": \"15\",\n\t\"inventoryKendraId\": \"4\",\n\t\"contactName\": \"Mayur Dixit\",\n\t\"contactNumber\": \"999-9999\",\n\t\"contactEmail\": \"999@999.999\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "inventory-get",
+					"request": {
+						"url": "http://localhost:8888/internal/kendra_inventory/4",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\"inventoryName\": \"test-inventory3\",\n\t\"inventorySerialNumber\": \"test-inventorySerialNumber2\",\n\t\"inventoryInUse\": \"true\",\n\t\"inventoryPurchasedOn\": \"2017-12-10\",\n\t\"inventoryUsedSince\": \"2017-12-10\",\n\t\"inventoryStoredAt\": \"home\",\n\t\"inventoryComment\": \"No Comment\",\n\t\"inventoryUpdatedBy\": \"15\",\n\t\"inventoryKendraId\": \"4\",\n\t\"contactName\": \"Ajay Patel\",\n\t\"contactNumber\": \"999-9999\",\n\t\"contactEmail\": \"999@999.999\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getAllUsers",
+			"request": {
+				"url": "",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "add-user",
+			"request": {
+				"url": "http://localhost:8888/authorize",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "mayur.dixit"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "authorization",
+			"request": {
+				"url": "http://localhost:8888/internal/authorize",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userName\": \"mayur.dixit\",\n\"password\": \"test\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

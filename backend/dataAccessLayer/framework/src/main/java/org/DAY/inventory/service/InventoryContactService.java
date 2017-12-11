@@ -1,7 +1,16 @@
-package org.DAY.service;
+/********************************************************************************
+ * Copyright (c) 2015-2016 GE Digital. All rights reserved.                     *
+ *                                                                              *
+ * The copyright to the computer software herein is the property of GE Digital. *
+ * The software may be used and/or copied only with the written permission of   *
+ * GE Digital or in accordance with the terms and conditions stipulated in the  *
+ * agreement/contract under which the software has been supplied.               *
+ ********************************************************************************/
 
-import org.DAY.db.entity.InventoryContact;
-import org.DAY.repository.IInventoryContactRepository;
+package org.DAY.inventory.service;
+
+import org.DAY.inventory.entity.InventoryContact;
+import org.DAY.inventory.repository.IInventoryContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +24,9 @@ public class InventoryContactService {
     @Autowired
     private IInventoryContactRepository inventoryContactRepository;
 
-    List<InventoryContact> getInventoryContactByInventoryId(String id){
-        int inventoryId = Integer.parseInt(id);
+    public List<InventoryContact> getInventoryContactByInventoryId(int id){
         List<InventoryContact> contactsForInventory = new ArrayList<>();
-
-        inventoryContactRepository.findByInventoryId(inventoryId).forEach(contactsForInventory::add);
+        inventoryContactRepository.findByInventoryId(id).forEach(contactsForInventory::add);
         return contactsForInventory;
     }
 

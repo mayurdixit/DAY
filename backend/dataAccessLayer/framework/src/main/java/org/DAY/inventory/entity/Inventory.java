@@ -1,4 +1,13 @@
-package org.DAY.db.entity;
+/********************************************************************************
+ * Copyright (c) 2015-2016 GE Digital. All rights reserved.                     *
+ *                                                                              *
+ * The copyright to the computer software herein is the property of GE Digital. *
+ * The software may be used and/or copied only with the written permission of   *
+ * GE Digital or in accordance with the terms and conditions stipulated in the  *
+ * agreement/contract under which the software has been supplied.               *
+ ********************************************************************************/
+
+package org.DAY.inventory.entity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,7 +25,7 @@ public class Inventory {
     private Date purchasedOn;
     private Date usedSince;
     private String storedAt;
-    private String kendraId;
+    private int kendraId;
     private String comment;
     private Date createdOn;
     private Date lastUpdatedOn;
@@ -110,11 +119,11 @@ public class Inventory {
         this.updatedBy = updatedBy;
     }
 
-    public String getKendraId() {
+    public int getKendraId() {
         return kendraId;
     }
 
-    public void setKendraId(String kendraId) {
+    public void setKendraId(int kendraId) {
         this.kendraId = kendraId;
     }
 

@@ -46,4 +46,9 @@ public class InventoryContactService {
         int inventoryContactId = Integer.parseInt(id);
         inventoryContactRepository.deleteByInventoryId(inventoryContactId);
     }
+
+    public void updateInventoryContact(InventoryContact inventoryContact, Date updateDate) {
+        inventoryContact.setLastUpdatedOn(updateDate);
+        inventoryContactRepository.save(inventoryContact);
+    }
 }

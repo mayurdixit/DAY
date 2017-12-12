@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { InventoryComponent } from './inventory/inventory.component';
 import { HomeComponent } from './home/home.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,9 +20,9 @@ const appRoutes: Routes =[
     component: LoginFormComponent
   },
   {
-    path: 'dashboard',
+    path: 'inventory',
     canActivate: [AuthguardGuard],
-    component: DashboardComponent
+    component: InventoryComponent
   },
   {
     path: 'home',
@@ -38,7 +38,7 @@ const appRoutes: Routes =[
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    InventoryComponent,
     HomeComponent,
     LoginFormComponent,
     HeaderComponent

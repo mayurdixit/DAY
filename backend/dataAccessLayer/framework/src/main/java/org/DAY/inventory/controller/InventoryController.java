@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.DAY.inventory.entity.Inventory;
 import org.DAY.inventory.entity.InventoryContact;
-import org.DAY.inventory.AddInventoryParam;
 import org.DAY.inventory.service.InventoryContactService;
 import org.DAY.inventory.service.InventoryService;
 import org.DAY.inventory.utility.InventoryData;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,21 +34,34 @@ public class InventoryController {
     private InventoryContactService inventoryContactService;
 
     @RequestMapping(value = "/internal/add_inventory", method = RequestMethod.POST)
-    public void addInventory(@RequestBody AddInventoryParam addInventoryParam){
-        System.out.println("parameters = " + addInventoryParam);
-        Inventory inventory = getInventoryEntity(addInventoryParam);
+    public void addInventory(@RequestBody InventoryData inventoryData){
+        System.out.println("parameters = " + inventoryData);
+        Inventory inventory = inventoryData.getInventory();
         Date currDate = new Date();
         inventory.setCreatedOn(currDate);
         inventory.setLastUpdatedOn(currDate);
         inventoryService.addInventory(inventory);
         System.out.println("generate ID = " + inventory.getId());
 
-        InventoryContact inventoryContact = getInventoryContactEntity(addInventoryParam);
-        inventoryContact.setCreatedOn(currDate);
-        inventoryContact.setLastUpdatedOn(currDate);
-        inventoryContact.setInventoryId(inventory.getId());
-        inventoryContactService.addInventoryContact(inventoryContact);
+        List<InventoryContact> inventoryContactList = inventoryData.getContactList();
+        inventoryContactList.forEach(inventoryContact -> {
+            inventoryContact.setCreatedOn(currDate);
+            inventoryContact.setLastUpdatedOn(currDate);
+            inventoryContact.setInventoryId(inventory.getId());
+            inventoryContactService.addInventoryContact(inventoryContact);
+        });
+    }
 
+    @RequestMapping(value = "/internal/update_inventory", method = RequestMethod.POST)
+    public InventoryData updateInventory(@RequestBody InventoryData inventoryData){
+        Inventory inventory = inventoryData.getInventory();
+        List<InventoryContact> inventoryContactList = inventoryData.getContactList();
+        Date updateDate = new Date();
+        inventoryService.updateInventory(inventory, updateDate);
+        inventoryContactList.forEach(inventoryContact -> {
+            inventoryContactService.updateInventoryContact(inventoryContact, updateDate);
+        });
+        return inventoryData;
     }
 
     @RequestMapping(value = "/internal/delete_inventory/{id}", method = RequestMethod.POST)
@@ -74,28 +85,5 @@ public class InventoryController {
             kendraInventory.add(inventoryData);
         });
         return kendraInventory;
-    }
-
-
-    private InventoryContact getInventoryContactEntity(AddInventoryParam addInventoryParam) {
-        InventoryContact retInventoryContact = new InventoryContact();
-        retInventoryContact.setName(addInventoryParam.getContactName());
-        retInventoryContact.setContactNumber(addInventoryParam.getContactNumber());
-        retInventoryContact.setEmail(addInventoryParam.getContactEmail());
-        return retInventoryContact;
-    }
-
-    private Inventory getInventoryEntity(AddInventoryParam addInventoryParam) {
-        Inventory retInventory = new Inventory();
-        retInventory.setName(addInventoryParam.getInventoryName());
-        retInventory.setSerialModelNumber(addInventoryParam.getInventorySerialNumber());
-        retInventory.setInUse(addInventoryParam.isInventoryInUse());
-        retInventory.setPurchasedOn(addInventoryParam.getInventoryPurchasedOn());
-        retInventory.setUsedSince(addInventoryParam.getInventoryUsedSince());
-        retInventory.setStoredAt(addInventoryParam.getInventoryStoredAt());
-        retInventory.setComment(addInventoryParam.getInventoryComment());
-        retInventory.setUpdatedBy(addInventoryParam.getInventoryUpdatedBy());
-        retInventory.setKendraId(addInventoryParam.getInventoryKendraId());
-        return retInventory;
     }
 }

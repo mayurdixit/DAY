@@ -53,4 +53,9 @@ public class InventoryService {
         int invntoryId = Integer.parseInt(id);
         inventoryRepository.deleteById(invntoryId);
     }
+
+    public void updateInventory(Inventory inventory, Date updateDate){
+        inventory.setLastUpdatedOn(updateDate);
+        inventoryRepository.save(inventory);
+    }
 }

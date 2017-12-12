@@ -3,12 +3,13 @@
       <div class="container-header">
         <!-- <a class="navbar-brand" href="#"><img border="0" src="http://localhost:3000/images/vote.jpg" width="50" height="50"></a> -->
       </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a routerLink="/home">Home</a></li>
-        <li class="active"><a routerLink="/dashboard">Dashboard</a></li>
+      <ul class="nav navbar-nav">       
+        <li class="active"><a routerLink="/inventory">Inventory</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a routerLink="/login" nav><span class="glyphicon glyphicon-log-in"></span> Login</a></li>  
+      <ul class="nav navbar-nav navbar-right">  
+        <div *ngIf="isUserLoggedIn; then logout else login"></div>              
+        <ng-template #login><li class="active"><a routerLink="/login" nav><span class="glyphicon glyphicon-log-in"></span> Login</a></li></ng-template>          
+        <ng-template #logout><li class="active"><a routerLink="/login" nav><span class="glyphicon glyphicon-log-in"></span> Logout</a></li></ng-template>     
       </ul>        
   </div>
 </nav>

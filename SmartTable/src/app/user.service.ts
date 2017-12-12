@@ -11,38 +11,29 @@ import { Router } from '@angular/router';
 @Injectable()
 export class UserService {
 
-  private isUserLoggedIn;
-  public username;
-  private password;
   private aclObj;
 
   //private authenticateUserURL = 'http://localhost:8888/authorize';
   private authenticateUserURL = "../internal/authorize";
 
-  constructor(private http: HttpClient, private router:Router) { 
-    this.isUserLoggedIn = false;
+  constructor(private http: HttpClient, private router:Router) {     
+    let stringifyAclObj = sessionStorage.getItem('currentUser');   
+    this.aclObj = JSON.parse(stringifyAclObj); 
+    console.log("User Service Constructor: " + this.aclObj);
   }
 
   getKendraList(){
     return this.aclObj.kendraInfoList;
   }
 
-  setUserLoggedIn(loggedIn: boolean) {
-    this.isUserLoggedIn = loggedIn;
+  isUserLoggedIn() {
+    return sessionStorage.getItem('currentUser') != null;
   }
 
-  getUserLoggedIn() {
-    return this.isUserLoggedIn;
-  }
-
-  setPassword(passwd: String) {
-    this.password = passwd;
-  }
-
-  authenticateUser(userdata: String){
+  authenticateUser(userdata: String, psword: String){
     var data={};
    
-    console.log("In Authenticate User = " + userdata );
+    console.log("In Authenticate User = " + userdata + " / " + psword );
     console.log("authenticateUserURL=" + this.authenticateUserURL);
     
     
@@ -52,7 +43,7 @@ export class UserService {
     headers.append('Access-Control-Allow-Credentials', 'true');
     headers.append('Content-type', 'application/json');
     
-    let requestBody = { "userName": this.username , "password":  this.password };
+    let requestBody = { "userName": userdata , "password":  psword };
     console.log("body=" + requestBody);
 
     this.http.post(this.authenticateUserURL, requestBody, {
@@ -63,17 +54,18 @@ export class UserService {
       console.log("response=" + response);
       this.aclObj = response;
       let kendraList = this.getKendraList();
-      console.log("response lenght=" + kendraList.length);
-      if(kendraList.length > 0) {
-        this.setUserLoggedIn(true);        
-        this.router.navigate(['dashboard']);
-      } else {
-        this.setUserLoggedIn(false);
-      }
-      
-      
+      console.log("response lenght=" + kendraList.length);      
+      sessionStorage.setItem('currentUser', JSON.stringify(this.aclObj));
+      if(kendraList.length > 0) {       
+        this.router.navigate(['inventory']);
+        
+      }         
     }) 
     .catch(this.handleError);
+}
+
+logout(){
+  sessionStorage.removeItem('currentUser');
 }
 
 private handleError(error: any): Promise<any> {

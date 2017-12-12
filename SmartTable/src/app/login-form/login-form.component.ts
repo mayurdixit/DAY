@@ -10,7 +10,9 @@ import { UserService } from '../user.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(private router:Router, private user:UserService) { }
+  constructor(private router:Router, private user:UserService) { 
+    user.logout();
+  }
 
   ngOnInit() {   
   }
@@ -22,11 +24,10 @@ export class LoginFormComponent implements OnInit {
     var password = ev.target.elements[1].value;
     console.log(username, password);
     if(username !== '' && password !== '') {
-     // this.user.setUserLoggedIn();
-      this.user.username = username;
-      this.user.setPassword(password);
-      this.user.authenticateUser(username);
-      //this.router.navigate(['dashboard']);
+     // this.user.setUserLoggedIn();  
+      this.user.authenticateUser(username, password);
+
+      //this.router.navigate(['inventory']);
     }
     return false;
   } 

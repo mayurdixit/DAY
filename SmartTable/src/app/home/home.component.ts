@@ -10,10 +10,8 @@ import { UserService } from '../user.service';
 })
 export class HomeComponent implements OnInit {
 
-  username = '';
   
   constructor(private router: Router, private user: UserService) { 
-    this.username = user.username;
   }
 
   ngOnInit() {

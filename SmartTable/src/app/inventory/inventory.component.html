@@ -1,19 +1,40 @@
 <app-header></app-header>
 <div class="container">
-
-  
-<div class="well well-sm custom-well-small">
-  <div class="row">
-    <div class="col-sm-4">
-    Zone: {{user.getZoneName()}}    
+  <div class="well well-sm custom-well-small">
+    <div class="row ">
+      <div class="col-sm-4 ">
+        Zone: {{user.getZoneName()}}
+      </div>
+      <div class="col-sm-4">
+        Kendra:
+        <select class="selectpicker" [(ngModel)]="selectedKendra">
+          <option *ngFor="let userAccess of user.getKendraList(); let i = index" value={{userAccess.id}}>
+            {{userAccess.name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <button class="btn btn-primary" (click)="getInventory()">Show Inventory</button>
+      </div>
+    </div>
   </div>
-  <div class="col-sm-8">
-   Kendra:  <select class="selectpicker">      
-      <option *ngFor="let userAccess of user.getKendraList(); let i = index" value = {{userAccess.id}}>
-        {{userAccess.name}}
-      </option>  
-    </select> 
-  </div> 
-  </div> 
+
+  <div *ngIf="inventoryService.isInventoryDataAvailable">
+    <table class="table" >
+      <thead>
+        <tr>
+          <th>Equipment-Name</th>
+          <th>Serial-Model-#</th>
+          <th>inUse</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="success">
+          <td>Projector</td>
+          <td>12345</td>
+          <td>Yes</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -16,17 +16,21 @@ export class UserService {
   //private authenticateUserURL = 'http://localhost:8888/authorize';
   private authenticateUserURL = "../internal/authorize";
 
-  constructor(private http: HttpClient, private router:Router) {     
-    let stringifyAclObj = sessionStorage.getItem('currentUser');   
-    this.aclObj = JSON.parse(stringifyAclObj); 
+  constructor(private http: HttpClient, private router: Router) {
+    let stringifyAclObj = sessionStorage.getItem('currentUser');
+    this.aclObj = JSON.parse(stringifyAclObj);
     console.log("User Service Constructor: " + this.aclObj);
   }
 
-  getZoneName(){
+
+  ngOnInit() {   }
+
+  getZoneName() {
     return this.aclObj.zoneInfo.name;
   }
 
-  getKendraList(){
+  getKendraList() {
+    console.log(JSON.stringify(this.aclObj.kendraInfoList));
     return this.aclObj.kendraInfoList;
   }
 
@@ -34,46 +38,44 @@ export class UserService {
     return sessionStorage.getItem('currentUser') != null;
   }
 
-  authenticateUser(userdata: String, psword: String){
-    var data={};
-   
-    console.log("In Authenticate User = " + userdata + " / " + psword );
+  authenticateUser(userdata: String, psword: String) {
+    var data = {};
+
+    console.log("In Authenticate User = " + userdata + " / " + psword);
     console.log("authenticateUserURL=" + this.authenticateUserURL);
-    
-    
 
     let headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', this.authenticateUserURL);
     headers.append('Access-Control-Allow-Credentials', 'true');
     headers.append('Content-type', 'application/json');
-    
-    let requestBody = { "userName": userdata , "password":  psword };
+
+    let requestBody = { "userName": userdata, "password": psword };
     console.log("body=" + requestBody);
 
     this.http.post(this.authenticateUserURL, requestBody, {
       headers: headers,
     })
-    .toPromise()
-    .then(response => {
-      console.log("response=" + response);
-      this.aclObj = response;
-      let kendraList = this.getKendraList();
-      console.log("response lenght=" + kendraList.length);      
-      sessionStorage.setItem('currentUser', JSON.stringify(this.aclObj));
-      if(kendraList.length > 0) {       
-        this.router.navigate(['inventory']);
-        
-      }         
-    }) 
-    .catch(this.handleError);
-}
+      .toPromise()
+      .then(response => {
+        console.log("response=" + response);
+        this.aclObj = response;
+        let kendraList = this.getKendraList();
+        console.log("response lenght=" + kendraList.length);
+        sessionStorage.setItem('currentUser', JSON.stringify(this.aclObj));
+        if (kendraList.length > 0) {
+          this.router.navigate(['inventory']);
 
-logout(){
-  sessionStorage.removeItem('currentUser');
-}
+        }
+      })
+      .catch(this.handleError);
+  }
 
-private handleError(error: any): Promise<any> {
-  console.error('Some error occured', error);
-  return Promise.reject(error.message || error);
-}
+  logout() {
+    sessionStorage.removeItem('currentUser');
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('Some error occured', error);
+    return Promise.reject(error.message || error);
+  }
 }

@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { HeaderComponent } from './header/header.component';
 
+import { InventoryService } from './inventory.service';
 import { UserService } from './user.service';
 import { AuthguardGuard } from './authguard.guard';
 import { HttpClientModule } from '@angular/common/http';
@@ -49,7 +50,7 @@ const appRoutes: Routes =[
     FormsModule,
     HttpClientModule,
   ],
-  providers: [UserService, AuthguardGuard],
+  providers: [UserService, AuthguardGuard, InventoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

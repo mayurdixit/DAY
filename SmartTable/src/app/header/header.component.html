@@ -1,7 +1,13 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="container-header">
-        <!-- <a class="navbar-brand" href="#"><img border="0" src="http://localhost:3000/images/vote.jpg" width="50" height="50"></a> -->
+        <a class="navbar-brand" href="#">PP Application </a>
       </div>
       <ul class="nav navbar-nav">       
         <li class="active"><a routerLink="/inventory">Inventory</a></li>
@@ -10,6 +16,6 @@
         <div *ngIf="isUserLoggedIn; then logout else login"></div>              
         <ng-template #login><li class="active"><a routerLink="/login" nav><span class="glyphicon glyphicon-log-in"></span> Login</a></li></ng-template>          
         <ng-template #logout><li class="active"><a routerLink="/login" nav><span class="glyphicon glyphicon-log-in"></span> Logout</a></li></ng-template>     
-      </ul>        
+      </ul>     
   </div>
 </nav>

@@ -22,6 +22,10 @@ export class UserService {
     console.log("User Service Constructor: " + this.aclObj);
   }
 
+  getZoneName(){
+    return this.aclObj.zoneInfo.name;
+  }
+
   getKendraList(){
     return this.aclObj.kendraInfoList;
   }

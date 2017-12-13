@@ -1,7 +1,19 @@
 <app-header></app-header>
-<select>
-    <option value="">Select Kendra</option>
-    <option *ngFor="let userAccess of user.getKendraList(); let i = index" value = {{userAccess.id}}>
-      {{userAccess.name}}
-    </option>  
-</select>
+<div class="container">
+
+  
+<div class="well well-sm custom-well-small">
+  <div class="row">
+    <div class="col-sm-4">
+    Zone: {{user.getZoneName()}}    
+  </div>
+  <div class="col-sm-8">
+   Kendra:  <select class="selectpicker">      
+      <option *ngFor="let userAccess of user.getKendraList(); let i = index" value = {{userAccess.id}}>
+        {{userAccess.name}}
+      </option>  
+    </select> 
+  </div> 
+  </div> 
+  </div>
+</div>

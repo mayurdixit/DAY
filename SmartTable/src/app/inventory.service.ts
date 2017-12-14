@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Route } from '@angular/router';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable()
 export class InventoryService {
@@ -10,7 +11,7 @@ export class InventoryService {
   private inventoryInfo;
   public isInventoryDataAvailable=false;
 
-  getInventoryInfo(){
+  getInventoryInfo(){    
     return this.inventoryInfo;
   }
 

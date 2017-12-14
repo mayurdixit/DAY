@@ -26,13 +26,23 @@
           <th>Equipment-Name</th>
           <th>Serial-Model-#</th>
           <th>inUse</th>
+          <th>Purchased on</th>
+          <th>Used since</th>
+          <th>Stored at</th>
+          <th>Kendar Id</th>
+          <th>Comment</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="success">
-          <td>Projector</td>
-          <td>12345</td>
-          <td>Yes</td>
+        <tr class="success" *ngFor="let equipmentInfo of inventoryService.getInventoryInfo(); let i=index">
+          <td>{{equipmentInfo.inventory.name}}</td>
+          <td>{{equipmentInfo.inventory.serialModelNumber}}</td>
+          <td>{{equipmentInfo.inventory.inUse}}</td>
+          <td>{{equipmentInfo.inventory.purchasedOn}}</td>
+          <td>{{equipmentInfo.inventory.usedSince}}</td>
+          <td>{{equipmentInfo.inventory.storedAt}}</td>
+          <td>{{equipmentInfo.inventory.kendraId}}</td>
+          <td>{{equipmentInfo.inventory.comment}}</td>
         </tr>
       </tbody>
     </table>

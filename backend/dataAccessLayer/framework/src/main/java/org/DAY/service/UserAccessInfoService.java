@@ -38,6 +38,7 @@ public class UserAccessInfoService {
     }
 
     public Optional<UserAccessInfo> getUserAccessInfoForUser(int userId){
+        System.out.println("UserAccessInfoService: called getUserAccessInfoForUser: userId=" + userId);
         return userAccessInfoRepository.findByUserId(userId);
     }
 }

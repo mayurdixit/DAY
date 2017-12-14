@@ -16,6 +16,12 @@ CREATE TABLE parth_preeti.inventory
     last_updated_on date NOT NULL,
     updated_by numeric NOT NULL,
     kendra_id numeric NOT NULL,
+    contact1_name text COLLATE pg_catalog."default",
+    contact1_phone text COLLATE pg_catalog."default",
+    contact1_email text COLLATE pg_catalog."default",
+    contact2_name text COLLATE pg_catalog."default",
+    contact2_phone text COLLATE pg_catalog."default",
+    contact2_email text COLLATE pg_catalog."default",
     CONSTRAINT inventory_pkey PRIMARY KEY (id)
 )
 WITH (

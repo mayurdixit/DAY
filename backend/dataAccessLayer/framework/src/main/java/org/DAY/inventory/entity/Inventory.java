@@ -30,6 +30,12 @@ public class Inventory {
     private Date createdOn;
     private Date lastUpdatedOn;
     private int updatedBy;
+    private String contact1_name;
+    private String contact1_phone;
+    private String contact1_email;
+    private String contact2_name;
+    private String contact2_phone;
+    private String contact2_email;
 
     public int getId() {
         return id;
@@ -127,21 +133,75 @@ public class Inventory {
         this.kendraId = kendraId;
     }
 
+    public String getContact1_name() {
+        return contact1_name;
+    }
+
+    public void setContact1_name(String contact1_name) {
+        this.contact1_name = contact1_name;
+    }
+
+    public String getContact1_phone() {
+        return contact1_phone;
+    }
+
+    public void setContact1_phone(String contact1_phone) {
+        this.contact1_phone = contact1_phone;
+    }
+
+    public String getContact1_email() {
+        return contact1_email;
+    }
+
+    public void setContact1_email(String contact1_email) {
+        this.contact1_email = contact1_email;
+    }
+
+    public String getContact2_name() {
+        return contact2_name;
+    }
+
+    public void setContact2_name(String contact2_name) {
+        this.contact2_name = contact2_name;
+    }
+
+    public String getContact2_phone() {
+        return contact2_phone;
+    }
+
+    public void setContact2_phone(String contact2_phone) {
+        this.contact2_phone = contact2_phone;
+    }
+
+    public String getContact2_email() {
+        return contact2_email;
+    }
+
+    public void setContact2_email(String contact2_email) {
+        this.contact2_email = contact2_email;
+    }
+
     @Override
     public String toString() {
         return "Inventory{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", serialModelNumber='" + serialModelNumber + '\'' +
-                ", inUse=" + inUse +
-                ", purchasedOn=" + purchasedOn +
-                ", usedSince=" + usedSince +
-                ", storedAt='" + storedAt + '\'' +
-                ", kendraId='" + kendraId + '\'' +
-                ", comment='" + comment + '\'' +
-                ", createdOn=" + createdOn +
-                ", lastUpdatedOn=" + lastUpdatedOn +
-                ", updatedBy=" + updatedBy +
-                '}';
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", serialModelNumber='" + serialModelNumber + '\'' +
+            ", inUse=" + inUse +
+            ", purchasedOn=" + purchasedOn +
+            ", usedSince=" + usedSince +
+            ", storedAt='" + storedAt + '\'' +
+            ", kendraId=" + kendraId +
+            ", comment='" + comment + '\'' +
+            ", createdOn=" + createdOn +
+            ", lastUpdatedOn=" + lastUpdatedOn +
+            ", updatedBy=" + updatedBy +
+            ", contact1_name='" + contact1_name + '\'' +
+            ", contact1_phone='" + contact1_phone + '\'' +
+            ", contact1_email='" + contact1_email + '\'' +
+            ", contact2_name='" + contact2_name + '\'' +
+            ", contact2_phone='" + contact2_phone + '\'' +
+            ", contact2_email='" + contact2_email + '\'' +
+            '}';
     }
 }

@@ -9,17 +9,16 @@
 
 package org.DAY.inventory.utility;
 
-import java.util.List;
-
+import org.DAY.db.entity.KendraInfo;
 import org.DAY.inventory.entity.Inventory;
-import org.DAY.inventory.entity.InventoryContact;
 
 /**
  * Created by 204048703 on 12/11/2017.
  */
 public class InventoryData {
     private Inventory inventory;
-    private List<InventoryContact> contactList;
+    private KendraInfo zoneInfo;
+    private KendraInfo kendraInfo;
 
     public Inventory getInventory() {
         return inventory;
@@ -29,19 +28,28 @@ public class InventoryData {
         this.inventory = inventory;
     }
 
-    public List<InventoryContact> getContactList() {
-        return contactList;
+    public KendraInfo getZoneInfo() {
+        return zoneInfo;
     }
 
-    public void setContactList(List<InventoryContact> contactList) {
-        this.contactList = contactList;
+    public void setZoneInfo(KendraInfo zoneInfo) {
+        this.zoneInfo = zoneInfo;
+    }
+
+    public KendraInfo getKendraInfo() {
+        return kendraInfo;
+    }
+
+    public void setKendraInfo(KendraInfo kendraInfo) {
+        this.kendraInfo = kendraInfo;
     }
 
     @Override
     public String toString() {
         return "InventoryData{" +
             "inventory=" + inventory +
-            ", contactList=" + contactList +
+            ", zoneInfo=" + zoneInfo +
+            ", kendraInfo=" + kendraInfo +
             '}';
     }
 }

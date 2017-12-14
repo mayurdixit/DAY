@@ -20,7 +20,7 @@
   </div>
 
   <div *ngIf="inventoryService.isInventoryDataAvailable">
-    <table class="table" >
+    <table class="table table-striped table-bordered table-responsive" >
       <thead>
         <tr>
           <th>Equipment-Name</th>
@@ -29,20 +29,34 @@
           <th>Purchased on</th>
           <th>Used since</th>
           <th>Stored at</th>
-          <th>Kendar Id</th>
+          <th>Kendar</th>
           <th>Comment</th>
+          <th>contact1 Name</th>
+          <th>contact1 phone#</th>
+          <th>contact1 Email</th>
+          <th>contact2 Name</th>
+          <th>contact2 phone#</th>
+          <th>contact2 Email</th>
         </tr>
+        
       </thead>
       <tbody>
-        <tr class="success" *ngFor="let equipmentInfo of inventoryService.getInventoryInfo(); let i=index">
+        <tr *ngFor="let equipmentInfo of inventoryService.getInventoryInfo(); let i=index">
           <td>{{equipmentInfo.inventory.name}}</td>
           <td>{{equipmentInfo.inventory.serialModelNumber}}</td>
           <td>{{equipmentInfo.inventory.inUse}}</td>
           <td>{{equipmentInfo.inventory.purchasedOn}}</td>
           <td>{{equipmentInfo.inventory.usedSince}}</td>
           <td>{{equipmentInfo.inventory.storedAt}}</td>
-          <td>{{equipmentInfo.inventory.kendraId}}</td>
+          <td>{{equipmentInfo.kendraInfo.name}}</td>
           <td>{{equipmentInfo.inventory.comment}}</td>
+          <td>{{equipmentInfo.inventory.contact1_name}}</td>
+          <td>{{equipmentInfo.inventory.contact1_phone}}</td>
+          <td>{{equipmentInfo.inventory.contact1_email}}</td>
+          <td>{{equipmentInfo.inventory.contact2_name}}</td>
+          <td>{{equipmentInfo.inventory.contact2_phone}}</td>
+          <td>{{equipmentInfo.inventory.contact2_email}}</td>
+          
         </tr>
       </tbody>
     </table>

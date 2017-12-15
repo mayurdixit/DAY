@@ -9,8 +9,11 @@
 
 package org.DAY.utility;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.DAY.db.entity.AccessRole;
+import org.DAY.db.entity.Applications;
 import org.DAY.db.entity.KendraInfo;
 import org.DAY.db.entity.User;
 
@@ -20,8 +23,10 @@ import org.DAY.db.entity.User;
 public class ACLInfo {
     private int userId;
     private String userName;
-    private KendraInfo zoneInfo;
+    private List<KendraInfo> zoneInfoList;
     private List<KendraInfo> kendraInfoList;
+    private List<Applications> applicationList;
+    private AccessRole accessRole;
 
     public int getUserId() {
         return userId;
@@ -39,15 +44,10 @@ public class ACLInfo {
         this.userName = userName;
     }
 
-    public KendraInfo getZoneInfo() {
-        return zoneInfo;
-    }
-
-    public void setZoneInfo(KendraInfo zoneInfo) {
-        this.zoneInfo = zoneInfo;
-    }
-
     public List<KendraInfo> getKendraInfoList() {
+        if(kendraInfoList == null) {
+            kendraInfoList = new ArrayList<>();
+        }
         return kendraInfoList;
     }
 
@@ -55,13 +55,45 @@ public class ACLInfo {
         this.kendraInfoList = kendraInfoList;
     }
 
+    public List<KendraInfo> getZoneInfoList() {
+        if(zoneInfoList == null){
+            zoneInfoList = new ArrayList<>();
+        }
+        return zoneInfoList;
+    }
+
+    public void setZoneInfoList(List<KendraInfo> zoneInfoList) {
+        this.zoneInfoList = zoneInfoList;
+    }
+
+    public List<Applications> getApplicationList() {
+        if(applicationList == null){
+            applicationList = new ArrayList<>();
+        }
+        return applicationList;
+    }
+
+    public void setApplicationList(List<Applications> applicationList) {
+        this.applicationList = applicationList;
+    }
+
+    public AccessRole getAccessRole() {
+        return accessRole;
+    }
+
+    public void setAccessRole(AccessRole accessRole) {
+        this.accessRole = accessRole;
+    }
+
     @Override
     public String toString() {
         return "ACLInfo{" +
             "userId=" + userId +
             ", userName='" + userName + '\'' +
-            ", zoneInfo=" + zoneInfo +
+            ", zoneInfoList=" + zoneInfoList +
             ", kendraInfoList=" + kendraInfoList +
+            ", applicationList=" + applicationList +
+            ", accessRole=" + accessRole +
             '}';
     }
 

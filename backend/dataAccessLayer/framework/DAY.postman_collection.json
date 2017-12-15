@@ -25,7 +25,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\t\"inventoryName\": \"test-inventory\",\n\t\"inventorySerialNumber\": \"test-inventorySerialNumber\",\n\t\"inventoryInUse\": \"true\",\n\t\"inventoryPurchasedOn\": \"2017-12-10\",\n\t\"inventoryUsedSince\": \"2017-12-10\",\n\t\"inventoryStoredAt\": \"home\",\n\t\"inventoryComment\": \"No Comment\",\n\t\"inventoryUpdatedBy\": \"15\",\n\t\"inventoryKendraId\": \"4\",\n\t\"contactName\": \"Mayur Dixit\",\n\t\"contactNumber\": \"999-9999\",\n\t\"contactEmail\": \"999@999.999\"\n}"
+							"raw": "{\t\"inventory\": \n\t\t{\n\t\t\t\"name\": \"Projector\",\n\t\t\t\"serialModelNumber\": \"12345678ABC\",\n\t\t\t\"inUse\": \"true\",\n\t\t\t\"purchasedOn\": \"2017-12-10\",\n\t\t\t\"usedSince\": \"2017-12-10\",\n\t\t\t\"storedAt\": \"home\",\n\t\t\t\"comment\": \"No Comment\",\n\t\t\t\"updatedBy\": \"15\",\n\t\t\t\"kendraId\": \"4\"\n\t\t},\n\t\"contactList\": \n\t\t[\n\t\t\t{\"name\": \"Dilip Amin\",\"contactNumber\": \"999-9999\", \"email\": \"999@999.999\"},\n\t\t\t{\"name\": \"Ashvin Baxi\",\"contactNumber\": \"999-9999\", \"email\": \"999@999.999\"}\n\t\t]\n}"
 						},
 						"description": ""
 					},
@@ -50,6 +50,26 @@
 						"description": ""
 					},
 					"response": []
+				},
+				{
+					"name": "inventory-update",
+					"request": {
+						"url": "http://localhost:8888/internal/update_inventory",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"inventory\": {\n            \"id\": 6,\n            \"name\": \"Projector2\",\n            \"serialModelNumber\": \"12345678ABC\",\n            \"inUse\": true,\n            \"purchasedOn\": \"2017-12-09T05:00:00.000+0000\",\n            \"usedSince\": \"2017-12-09T05:00:00.000+0000\",\n            \"storedAt\": \"home\",\n            \"kendraId\": 4,\n            \"comment\": \"No Comment\",\n            \"createdOn\": \"2017-12-12T05:00:00.000+0000\",\n            \"lastUpdatedOn\": \"2017-12-12T05:00:00.000+0000\",\n            \"updatedBy\": 15\n        },\n        \"contactList\": [\n            {\n                \"id\": 6,\n                \"inventoryId\": 6,\n                \"name\": \"Dilip Amin\",\n                \"contactNumber\": \"999-9999\",\n                \"email\": \"999@999.999\",\n                \"createdOn\": \"2017-12-12T05:00:00.000+0000\",\n                \"lastUpdatedOn\": \"2017-12-12T05:00:00.000+0000\"\n            },\n            {\n                \"id\": 7,\n                \"inventoryId\": 6,\n                \"name\": \"Ashvin Baxi\",\n                \"contactNumber\": \"999-9999\",\n                \"email\": \"999@999.999\",\n                \"createdOn\": \"2017-12-12T05:00:00.000+0000\",\n                \"lastUpdatedOn\": \"2017-12-12T05:00:00.000+0000\"\n            }\n        ]\n    }"
+						},
+						"description": ""
+					},
+					"response": []
 				}
 			]
 		},
@@ -67,7 +87,7 @@
 		{
 			"name": "add-user",
 			"request": {
-				"url": "http://localhost:8888/authorize",
+				"url": "http://localhost:8888/internal/add-user",
 				"method": "POST",
 				"header": [
 					{
@@ -78,7 +98,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "mayur.dixit"
+					"raw": "{\n\t\"first_name\": \"Mayur\",\n\t\"last_name\": \"Dixit\",\n\t\"contact_number\": \"999-99-9999\",\n\t\"enabled\": \"true\",\n\t\"created_on\": \"2017-12-15\",\n\t\"last_accessed_on\": \"2017-12-15\",\n\t\"email\": \"mayur.dixit@nomail.com\",\n\t\"user_name\": \"mayur.dixit.zonal\",\n\t\"password\": \"test\",\n\t\"default_password\": \"test\"\n}"
 				},
 				"description": ""
 			},

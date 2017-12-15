@@ -13,11 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.DAY.db.entity.AccessRole;
+import org.DAY.db.entity.Applications;
 import org.DAY.db.entity.KendraInfo;
 import org.DAY.db.entity.User;
 import org.DAY.db.entity.UserAccessInfo;
+import org.DAY.db.entity.UserAppRole;
+import org.DAY.repository.IAccessRoleRepository;
+import org.DAY.repository.IApplicationsRepository;
 import org.DAY.service.KendraInfoService;
-import org.DAY.service.UserAccessInfoService;
+import org.DAY.service.UserAppRoleService;
 import org.DAY.service.UserService;
 import org.DAY.utility.ACLInfo;
 import org.DAY.utility.Login;
@@ -38,10 +43,16 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private UserAccessInfoService userAccessInfoService;
+    private UserAppRoleService userAppRoleService;
 
     @Autowired
     private KendraInfoService kendraInfoService;
+
+    @Autowired
+    private IApplicationsRepository applicationsRepository;
+
+    @Autowired
+    private IAccessRoleRepository accessRoleRepository;
 
     @RequestMapping("/internal/user")
     public List<User> getAllUser(){
@@ -69,34 +80,59 @@ public class UserController {
         ACLInfo aclInfo = new ACLInfo();
         UserAccessInfo retUserAccessInfo;
         List<KendraInfo> retKendraInfo = new ArrayList<>();
-        KendraInfo parentKendraInfo;
+        List<KendraInfo> retZoneInfo = new ArrayList<>();
         int parentKendraId;
+        List<Integer> addedKendraIdList = new ArrayList<>();
+        List<Integer> addedZoneIdList = new ArrayList<>();
+
 
         retUser = isUserHasAccess(formData);
         if(retUser != null){
             aclInfo.populateUserInfo(retUser);
-            Optional userAccessInfoOprional = userAccessInfoService.getUserAccessInfoForUser(retUser.getId());
-            if(userAccessInfoOprional.isPresent()){
-                retUserAccessInfo = (UserAccessInfo)userAccessInfoOprional.get();
-                int kendraId = retUserAccessInfo.getKendraId();
-                List<KendraInfo> childKendraList = kendraInfoService.getChildKendraInfo(kendraId);
-                if(childKendraList.size() > 0) {
-                    retKendraInfo = childKendraList;
-                    parentKendraId = kendraId;
-                } else {
-                    KendraInfo kendraInfo = getKendraInfo(kendraId);
-                    retKendraInfo.add(kendraInfo);
-                    parentKendraId = kendraInfo.getParent();
+            List<UserAppRole> userAppRoleList = userAppRoleService.getAppRoleByForUser(retUser.getId());
+                userAppRoleList.forEach(userAppRole -> {
+                    int kendraId = userAppRole.getKendraId();
+                    //add Kendras and Zones
+                    updateKendraZoneList(aclInfo, addedKendraIdList, addedZoneIdList, kendraId);
+                    //add applications
+                    Optional<Applications> applicationsOptional = applicationsRepository.findById(userAppRole.getAppId());
+                    if(applicationsOptional.isPresent()){
+                        aclInfo.getApplicationList().add(applicationsOptional.get());
+                    }
+                    //add roles
+                    Optional<AccessRole> accessRoleOptional = accessRoleRepository.findById(userAppRole.getRoleId());
+                    if(accessRoleOptional.isPresent()){
+                        aclInfo.setAccessRole(accessRoleOptional.get());
+                    }
+                });
+            }
+        return aclInfo;
+        }
+
+
+
+    private void updateKendraZoneList(ACLInfo aclInfo, List<Integer> addedKendraIdList, List<Integer>
+        addedZoneIdList, int kendraId) {
+        KendraInfo currKendraInfo = getKendraInfo(kendraId);
+        List<KendraInfo> childKendraList = kendraInfoService.getChildKendraInfo(currKendraInfo.getId());
+        if(childKendraList.size() > 0) {
+            if(!addedZoneIdList.contains(currKendraInfo.getId())){
+                aclInfo.getZoneInfoList().add(currKendraInfo);
+                aclInfo.getKendraInfoList().addAll(childKendraList);
+                addedZoneIdList.add(currKendraInfo.getId());
+            }
+        } else {
+            if(!addedKendraIdList.contains(currKendraInfo.getId())){
+                aclInfo.getKendraInfoList().add(currKendraInfo);
+                Optional<KendraInfo> zoneKendraInfoOptional = kendraInfoService.getKendraInfo(currKendraInfo.getParent());
+                if(zoneKendraInfoOptional.isPresent()){
+                    aclInfo.getZoneInfoList().add(zoneKendraInfoOptional.get());
                 }
-
-                parentKendraInfo = getKendraInfo(parentKendraId);
-
-                aclInfo.setKendraInfoList(retKendraInfo);
-                aclInfo.setZoneInfo(parentKendraInfo);
+                addedKendraIdList.add(currKendraInfo.getId());
             }
         }
-        return aclInfo;
     }
+
 
     private User isUserHasAccess(Login data){
         User validUser = null;
@@ -107,6 +143,8 @@ public class UserController {
             if(!data.getPassword().equals(validUser.getPassword())) {
                 validUser = null;
             }
+        } else {
+            System.out.println("User Not found");
         }
         return validUser;
     }

@@ -14,6 +14,7 @@ export class InventoryComponent implements OnInit {
  
 
   private selectedKendra=1;
+  private selectedZone;
   private showInventoryData = false;
 
   constructor(private router: Router, private user: UserService, private inventoryService: InventoryService) {

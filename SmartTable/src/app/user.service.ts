@@ -34,6 +34,11 @@ export class UserService {
     return this.aclObj.kendraInfoList;
   }
 
+  getZoneList() {
+    console.log(JSON.stringify(this.aclObj.kendraInfoList));
+    return this.aclObj.zoneInfoList;
+  }
+
   isUserLoggedIn() {
     return sessionStorage.getItem('currentUser') != null;
   }

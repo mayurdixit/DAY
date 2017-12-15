@@ -3,7 +3,12 @@
   <div class="well well-sm custom-well-small">
     <div class="row ">
       <div class="col-sm-4 ">
-        Zone: {{user.getZoneName()}}
+        Zone: 
+        <select class="selectpicker" [(ngModel)]="selectedZone">
+            <option *ngFor="let zone of user.getZoneList(); let i = index" value={{zone.id}}>
+              {{zone.name}}
+            </option>
+          </select>
       </div>
       <div class="col-sm-4">
         Kendra:

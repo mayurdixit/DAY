@@ -13,13 +13,17 @@ import { InventoryService } from '../inventory.service';
 export class InventoryComponent implements OnInit {
  
 
-  private selectedKendra=1;
+  private selectedKendra;
   private selectedZone;
   private showInventoryData = false;
+  private currentUser = null;
 
   constructor(private router: Router, private user: UserService, private inventoryService: InventoryService) {
     //constructor(private router: Router, private user: UserService) {
-    console.log(this.user.isUserLoggedIn());    
+    console.log("In Inventory: " + this.user.isUserLoggedIn());   
+    var stringifyCurrentUser =  localStorage.getItem('currentUser');
+    this.currentUser = JSON.parse(stringifyCurrentUser);
+    console.log(this.currentUser);
    }
 
    getInventory(){

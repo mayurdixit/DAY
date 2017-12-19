@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+//import { Router } from '@angular/router';
 import { UserService } from '../user.service';
+import { AlertService } from '../services/alert.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login-form',
@@ -10,25 +14,41 @@ import { UserService } from '../user.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor(private router:Router, private user:UserService) { 
-    user.logout();
-  }
+  model: any = {};
+  loading = false;
+  homeUrl = 'home';
+
+ // constructor(private router:Router, private user:UserService) { 
+  constructor(
+    private user:UserService,
+    private router: Router,
+    private alertService: AlertService) {  }
 
   ngOnInit() {   
+    this.user.logout();
   }
+
+
 
   loginUser(ev) {
     ev.preventDefault();
+    console.log("Submited:");
     console.log(ev);
     var username = ev.target.elements[0].value;
     var password = ev.target.elements[1].value;
     console.log(username, password);
-    if(username !== '' && password !== '') {
+    //if(username !== '' && password !== '') {
      // this.user.setUserLoggedIn();  
-      this.user.authenticateUser(username, password);
-
-      //this.router.navigate(['inventory']);
-    }
-    return false;
+     this.loading = true;
+      this.user.authenticateUser(username, password).subscribe(
+        data => {
+          this.router.navigate([this.homeUrl]);
+        },
+        error => {
+          console.log("got error");
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      );
   } 
 }

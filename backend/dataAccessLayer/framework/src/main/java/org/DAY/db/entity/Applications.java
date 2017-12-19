@@ -27,6 +27,7 @@ public class Applications {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private String appUrl;
     private String comment;
     private Date createdOn;
     private Date lastUpdatedOn;
@@ -71,11 +72,20 @@ public class Applications {
         this.lastUpdatedOn = lastUpdatedOn;
     }
 
+    public String getAppUrl() {
+        return appUrl;
+    }
+
+    public void setAppUrl(String appUrl) {
+        this.appUrl = appUrl;
+    }
+
     @Override
     public String toString() {
         return "Applications{" +
             "id=" + id +
             ", name='" + name + '\'' +
+            ", appUrl='" + appUrl + '\'' +
             ", comment='" + comment + '\'' +
             ", createdOn=" + createdOn +
             ", lastUpdatedOn=" + lastUpdatedOn +

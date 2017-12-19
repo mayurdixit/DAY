@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -17,7 +17,7 @@ export class UserService {
   private authenticateUserURL = "../internal/authorize";
 
   constructor(private http: HttpClient, private router: Router) {
-    let stringifyAclObj = sessionStorage.getItem('currentUser');
+    let stringifyAclObj = localStorage.getItem('currentUser');
     this.aclObj = JSON.parse(stringifyAclObj);
     console.log("User Service Constructor: " + this.aclObj);
   }
@@ -39,8 +39,13 @@ export class UserService {
     return this.aclObj.zoneInfoList;
   }
 
+  getApplicationList() {
+    console.log(JSON.stringify(this.aclObj.applicationList));
+    return this.aclObj.applicationList;
+  }
+
   isUserLoggedIn() {
-    return sessionStorage.getItem('currentUser') != null;
+    return localStorage.getItem('currentUser') != null;
   }
 
   authenticateUser(userdata: String, psword: String) {
@@ -57,30 +62,25 @@ export class UserService {
     let requestBody = { "userName": userdata, "password": psword };
     console.log("body=" + requestBody);
 
-    this.http.post(this.authenticateUserURL, requestBody, {
+    return this.http.post(this.authenticateUserURL, requestBody, {
       headers: headers,
     })
-      .toPromise()
-      .then(response => {
+      .map(response => {
         console.log("response=" + response);
         this.aclObj = response;
-        let kendraList = this.getKendraList();
-        console.log("response lenght=" + kendraList.length);
-        sessionStorage.setItem('currentUser', JSON.stringify(this.aclObj));
-        if (kendraList.length > 0) {
-          this.router.navigate(['inventory']);
+        //let kendraList = this.getKendraList();
+        //console.log("response lenght=" + kendraList.length);
+        localStorage.setItem('currentUser', JSON.stringify(this.aclObj));
+        //if (kendraList.length > 0) {
+        //  this.router.navigate(['inventory']);
 
-        }
-      })
-      .catch(this.handleError);
+        //}
+        return response;
+      })     
   }
 
   logout() {
-    sessionStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUser');
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('Some error occured', error);
-    return Promise.reject(error.message || error);
-  }
 }

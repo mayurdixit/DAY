@@ -1,33 +1,38 @@
 <app-header></app-header>
-<div class="container">
+<div class="container-fluid">
   <div class="well well-sm custom-well-small">
     <div class="row ">
-      <div class="col-sm-4 ">
-        Zone: 
+        <div [ngClass]="{'col-sm-3':currentUser.accessRole.id === 2, 'col-sm-4': currentUser.accessRole.id !== 2}">
+        <span class="label label-default">Zone</span>
         <select class="selectpicker" [(ngModel)]="selectedZone">
-            <option *ngFor="let zone of user.getZoneList(); let i = index" value={{zone.id}}>
+            <option *ngFor="let zone of currentUser.zoneInfoList; let i = index" value={{zone.id}}>
               {{zone.name}}
             </option>
           </select>
       </div>
-      <div class="col-sm-4">
-        Kendra:
+      <div [ngClass]="{'col-sm-3':currentUser.accessRole.id === 2, 'col-sm-4': currentUser.accessRole.id !== 2}">
+          <span class="label label-default">Kendra</span>
         <select class="selectpicker" [(ngModel)]="selectedKendra">
-          <option *ngFor="let userAccess of user.getKendraList(); let i = index" value={{userAccess.id}}>
-            {{userAccess.name}}
+            Kendra:<option *ngFor="let kendraInfo of currentUser.kendraInfoList; let i = index" value={{kendraInfo.id}}>
+            {{kendraInfo.name}}
           </option>
         </select>
       </div>
-      <div class="col-sm-4">
+      <div [ngClass]="{'col-sm-3':currentUser.accessRole.id === 2, 'col-sm-4': currentUser.accessRole.id !== 2}">
         <button class="btn btn-primary" (click)="getInventory()">Show Inventory</button>
+      </div>
+      <div class="col-sm-3" *ngIf="currentUser.accessRole.id === 2">
+        <button class="btn btn-primary">Users</button>
       </div>
     </div>
   </div>
 
   <div *ngIf="inventoryService.isInventoryDataAvailable">
-    <table class="table table-striped table-bordered table-responsive" >
+    <div class="table-responsive table-condensed">
+    <table class="table table-striped table-bordered" >
       <thead>
         <tr>
+          <th></th>
           <th>Equipment-Name</th>
           <th>Serial-Model-#</th>
           <th>inUse</th>
@@ -47,6 +52,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let equipmentInfo of inventoryService.getInventoryInfo(); let i=index">
+          <td><button type="button" class="btn btn-link">Edit </button></td>
           <td>{{equipmentInfo.inventory.name}}</td>
           <td>{{equipmentInfo.inventory.serialModelNumber}}</td>
           <td>{{equipmentInfo.inventory.inUse}}</td>
@@ -65,5 +71,6 @@
         </tr>
       </tbody>
     </table>
+  </div>
   </div>
 </div>

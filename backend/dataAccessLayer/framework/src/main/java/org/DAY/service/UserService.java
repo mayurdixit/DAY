@@ -10,6 +10,7 @@
 package org.DAY.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,5 +64,10 @@ public class UserService {
             retOptional = Optional.empty();
         }
         return retOptional;
+    }
+
+    public void updateLastAccessedOn(User currUser) {
+        currUser.setLast_accessed_on(new Date());
+        userRepository.save(currUser);
     }
 }

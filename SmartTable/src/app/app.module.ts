@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -12,8 +12,10 @@ import { HeaderComponent } from './header/header.component';
 
 import { InventoryService } from './inventory.service';
 import { UserService } from './user.service';
+import { AlertService} from './services/alert.service';
 import { AuthguardGuard } from './authguard.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertComponent } from './alert/alert.component';
 
 const appRoutes: Routes =[
   {
@@ -42,15 +44,17 @@ const appRoutes: Routes =[
     InventoryComponent,
     HomeComponent,
     LoginFormComponent,
-    HeaderComponent
+    HeaderComponent,
+    AlertComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
-  providers: [UserService, AuthguardGuard, InventoryService],
+  providers: [UserService, AuthguardGuard, InventoryService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

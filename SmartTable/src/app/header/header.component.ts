@@ -10,9 +10,14 @@ import {UserService} from '../user.service';
 })
 export class HeaderComponent implements OnInit {
 
+  private currentUser;
   isUserLoggedIn=false;
   constructor(private user: UserService) { 
     console.log("in header isUserLoggedIn=" + user.isUserLoggedIn());
+    var stringifyUser = localStorage.getItem('currentUser');
+    this.currentUser = JSON.parse(stringifyUser);
+
+    console.log(this.currentUser.applicationList);
   }
   ngOnInit() {}
 }

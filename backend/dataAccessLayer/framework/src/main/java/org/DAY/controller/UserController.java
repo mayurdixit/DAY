@@ -10,6 +10,7 @@
 package org.DAY.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,11 +27,16 @@ import org.DAY.service.UserAppRoleService;
 import org.DAY.service.UserService;
 import org.DAY.utility.ACLInfo;
 import org.DAY.utility.Login;
+import org.DAY.utility.ReousrceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -75,7 +81,7 @@ public class UserController {
     }
 
     @RequestMapping(value="/internal/authorize", method=RequestMethod.POST)
-    public ACLInfo authorizeUser(@RequestBody Login formData){
+    public ResponseEntity<?> authorizeUser(@RequestBody Login formData){
         User retUser;
         ACLInfo aclInfo = new ACLInfo();
         UserAccessInfo retUserAccessInfo;
@@ -105,11 +111,13 @@ public class UserController {
                         aclInfo.setAccessRole(accessRoleOptional.get());
                     }
                 });
+                userService.updateLastAccessedOn(retUser);
+
+            } else {
+                return new ResponseEntity<String>("Username or Password is incorrect", HttpStatus.BAD_REQUEST);
             }
-        return aclInfo;
+        return new ResponseEntity(aclInfo, HttpStatus.OK);
         }
-
-
 
     private void updateKendraZoneList(ACLInfo aclInfo, List<Integer> addedKendraIdList, List<Integer>
         addedZoneIdList, int kendraId) {

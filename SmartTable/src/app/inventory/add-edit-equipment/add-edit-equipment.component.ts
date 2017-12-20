@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { InventoryService } from '../../inventory.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-equipment',
@@ -12,7 +13,7 @@ export class AddEditEquipmentComponent implements OnInit {
   private selectedZoneName;
   private selectedKendraName;
   
-  constructor(inventoryService: InventoryService) { 
+  constructor(private router: Router, private inventoryService: InventoryService) { 
     console.log("selectedZone = " + inventoryService.getSelectedZoneName());
     console.log("selectedKendra = " + inventoryService.getSelectedKendraName());
     this.selectedKendraName = inventoryService.getSelectedKendraName();
@@ -20,6 +21,10 @@ export class AddEditEquipmentComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  cancelEqipment(){
+    this.router.navigate(['/inventory']);
   }
 
 }

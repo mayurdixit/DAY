@@ -28,4 +28,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 Form Validation in Angular - https://angular.io/guide/form-validation
+Login page example - http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
 

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="container-header">
-        <a class="navbar-brand" href="/home">PP Application </a>
+        <a class="navbar-brand" routerLink="/home">PP Application </a>
       </div>
       <ul class="nav navbar-nav">     
             <li class="active" *ngFor="let application of currentUser.applicationList; let i=index">
@@ -10,8 +10,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">  
         <div *ngIf="user.isUserLoggedIn(); then logout else login"></div>              
-        <ng-template #login><li class="active"><a routerLink="/login" nav><span class="glyphicon glyphicon-log-in"></span> Login</a></li></ng-template>          
-        <ng-template #logout><li class="active"><a routerLink="/login" nav><span class="glyphicon glyphicon-log-in"></span> Logout</a></li></ng-template>     
+        <ng-template #login><li class="active"><a href="/login" nav><span class="glyphicon glyphicon-log-in"></span> Login</a></li></ng-template>          
+        <ng-template #logout><li class="active"><a href="/login" nav><span class="glyphicon glyphicon-log-in"></span> Logout</a></li></ng-template>     
       </ul>   
   </div>
 </nav> 

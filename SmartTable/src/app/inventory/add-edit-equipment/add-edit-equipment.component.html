@@ -1,0 +1,128 @@
+<app-header></app-header>>
+<div class="container">
+  <div class="well well-sm custom-well">
+    <div class="row">
+      <div class='col-sm-6'>
+        <span class="label label-default">Zone:</span>
+        <b>{{selectedZoneName}}</b>
+      </div>
+      <div class='col-sm-6'>
+        <span class="label label-default">Kendra</span>
+        <b>{{selectedKendraName}}</b>
+      </div>
+    </div>
+  </div>
+  <div class="well well-sm custom-well custom-well-small">
+    <form>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="type"> Type </label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="text" id="type">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="serialNumber"> Serial/Model Number </label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="text" id="serialNumber">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="inUse"> In Use </label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="checkbox" id="inUse">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="PurchasedOn"> Purchased on </label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="text" id="PurchasedOn" placeholder="mm/dd/yyyy">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="storedAt"> Stored at </label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="text" id="storedAt">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="contact1"> Contact Person 1 </label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="text" id="contact1">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="contact1Phone"> Contact Person 1 Phone#</label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="text" id="contact1Phone">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="contact1Email"> Contact Person 1 Email</label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="text" id="contact1Email">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="contact2"> Contact Person 2 </label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="text" id="contact2">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="contact2Phone"> Contact Person 2 Phone#</label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="text" id="contact2Phone">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="contact2Email"> Contact Person 2 Email</label>
+        </div>
+        <div class='col-sm-6'>
+          <input type="text" id="contact2Email">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="comments"> Comments</label>
+        </div>
+        <div class='col-sm-6'>
+          <textarea rows="5" cols="50" id="comments"></textarea>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class='col-sm-4'>
+          <button class="btn btn-primary" (click)="addEqipment()">Add Equipment</button>
+        </div>
+        <div class='col-sm-4'>
+          <button class="btn btn-primary" (click)="cancelEqipment()">Cancel</button>
+        </div>
+        <div class='col-sm-4'>
+          <button class="btn btn-primary" (click)="resetEqipment()">Reset</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

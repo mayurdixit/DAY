@@ -16,6 +16,7 @@ import { AlertService} from './services/alert.service';
 import { AuthguardGuard } from './authguard.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './alert/alert.component';
+import { AddEditEquipmentComponent } from './inventory/add-edit-equipment/add-edit-equipment.component';
 
 const appRoutes: Routes =[
   {
@@ -26,6 +27,11 @@ const appRoutes: Routes =[
     path: 'inventory',
     canActivate: [AuthguardGuard],
     component: InventoryComponent
+  },
+  {
+    path: 'inventory/add-equipment',
+    canActivate: [AuthguardGuard],
+    component: AddEditEquipmentComponent
   },
   {
     path: 'home',
@@ -45,7 +51,8 @@ const appRoutes: Routes =[
     HomeComponent,
     LoginFormComponent,
     HeaderComponent,
-    AlertComponent
+    AlertComponent,
+    AddEditEquipmentComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

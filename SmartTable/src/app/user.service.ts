@@ -80,7 +80,10 @@ export class UserService {
   }
 
   logout() {
+    console.log("Loging out");
     localStorage.removeItem('currentUser');
+    localStorage.clear();
+    sessionStorage.clear();
   }
 
 }

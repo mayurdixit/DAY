@@ -52,7 +52,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let equipmentInfo of inventoryService.getInventoryInfo(); let i=index">
-          <td><button type="button" class="btn btn-link">Edit </button></td>
+          <td><button type="button" class="btn btn-link" (click)="updateEquipment(equipmentInfo.inventory.id)">Edit </button></td>          
           <td>{{equipmentInfo.inventory.name}}</td>
           <td>{{equipmentInfo.inventory.serialModelNumber}}</td>
           <td>{{equipmentInfo.inventory.inUse}}</td>

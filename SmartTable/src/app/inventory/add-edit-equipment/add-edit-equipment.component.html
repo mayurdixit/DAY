@@ -13,21 +13,23 @@
     </div>
   </div>
   <div class="well well-sm custom-well custom-well-equipment">
-    <form>
+    <form (ngSubmit)="f.form.valid && addEquipment()" #f="ngForm">
       <div class="form-group row">
         <div class='col-sm-4'>
-          <label for="type"> Type </label>
+          <label for="type"> Equipment Type </label>
         </div>
-        <div class='col-sm-6'>
-          <input type="text" id="type">
+        <div class='col-sm-6' [ngClass]="{'has-error': f.submitted && !equipmentName.valid}">
+          <input type="text" id="type" name="equipmentName" [(ngModel)]="model.equipmentName" #equipmentName="ngModel" required>
+          <div *ngIf="f.submitted && !equipmentName.valid" class="help-block">Equipment name is required</div>
         </div>
       </div>
       <div class="form-group row">
         <div class='col-sm-4'>
           <label for="serialNumber"> Serial/Model Number </label>
         </div>
-        <div class='col-sm-6'>
-          <input type="text" id="serialNumber">
+        <div class='col-sm-6' [ngClass]="{'has-error': f.submitted && !serialNumber.valid}">
+          <input type="text" id="serialNumber" name="serialNumber" [(ngModel)]="model.serialNumber" #serialNumber="ngModel" required>
+          <div *ngIf="f.submitted && !serialNumber.valid" class="help-block">Serial number is required</div>
         </div>
       </div>
       <div class="form-group row">
@@ -35,23 +37,24 @@
           <label for="inUse"> In Use </label>
         </div>
         <div class='col-sm-6'>
-          <input type="checkbox" id="inUse">
+          <input type="checkbox" id="inUse" name="inUse" [(ngModel)]="model.inUse" #inUse="ngModel" checked>
         </div>
       </div>
       <div class="form-group row">
         <div class='col-sm-4'>
-          <label for="PurchasedOn"> Purchased on </label>
+          <label for="purchasedOn"> Purchased on </label>
         </div>
         <div class='col-sm-6'>
-          <input type="text" id="PurchasedOn" placeholder="mm/dd/yyyy">
+          <input type="text" id="purchasedOn" name="purchasedOn" [(ngModel)]="model.purchasedOn" #purchasedOn="ngModel" placeholder="yyyy-mm-dd">
         </div>
       </div>
       <div class="form-group row">
         <div class='col-sm-4'>
           <label for="storedAt"> Stored at </label>
         </div>
-        <div class='col-sm-6'>
-          <input type="text" id="storedAt">
+        <div class='col-sm-6' [ngClass]="{'has-error': f.submitted && !storedAt.valid}">
+          <input type="text" id="storedAt" name="storedAt" [(ngModel)]="model.storedAt" #storedAt="ngModel" required>
+          <div *ngIf="f.submitted && !storedAt.valid" class="help-block">Stored at information required</div>
         </div>
       </div>
       <div class="form-group row">
@@ -59,7 +62,7 @@
           <label for="contact1"> Contact Person 1 </label>
         </div>
         <div class='col-sm-6'>
-          <input type="text" id="contact1">
+          <input type="text" id="contact1" name="contact1" [(ngModel)]="model.contact1" #contact1="ngModel">
         </div>
       </div>
       <div class="form-group row">
@@ -67,7 +70,7 @@
           <label for="contact1Phone"> Contact Person 1 Phone#</label>
         </div>
         <div class='col-sm-6'>
-          <input type="text" id="contact1Phone">
+          <input type="text" id="contact1Phone" name="contact1Phone" [(ngModel)]="model.contact1Phone" #contact1Phone="ngModel">
         </div>
       </div>
       <div class="form-group row">
@@ -75,7 +78,7 @@
           <label for="contact1Email"> Contact Person 1 Email</label>
         </div>
         <div class='col-sm-6'>
-          <input type="text" id="contact1Email">
+          <input type="text" id="contact1Email" name="contact1Email" [(ngModel)]="model.contact1Email" #contact1Email="ngModel">
         </div>
       </div>
       <div class="form-group row">
@@ -83,7 +86,7 @@
           <label for="contact2"> Contact Person 2 </label>
         </div>
         <div class='col-sm-6'>
-          <input type="text" id="contact2">
+          <input type="text" id="contact2" name="contact2" [(ngModel)]="model.contact2" #contact2="ngModel">
         </div>
       </div>
       <div class="form-group row">
@@ -91,7 +94,7 @@
           <label for="contact2Phone"> Contact Person 2 Phone#</label>
         </div>
         <div class='col-sm-6'>
-          <input type="text" id="contact2Phone">
+          <input type="text" id="contact2Phone" name="contact2Phone" [(ngModel)]="model.contact2Phone" #contact2Phone="ngModel">
         </div>
       </div>
       <div class="form-group row">
@@ -99,7 +102,7 @@
           <label for="contact2Email"> Contact Person 2 Email</label>
         </div>
         <div class='col-sm-6'>
-          <input type="text" id="contact2Email">
+          <input type="text" id="contact2Email" name="contact2Email" [(ngModel)]="model.contact2Email" #contact2Email="ngModel">
         </div>
       </div>
       <div class="form-group row">
@@ -107,19 +110,19 @@
           <label for="comments"> Comments</label>
         </div>
         <div class='col-sm-6'>
-          <textarea rows="5" cols="50" id="comments"></textarea>
+          <textarea rows="5" cols="50" id="comments" name="comments" [(ngModel)]="model.comments" #comments="ngModel"></textarea>
         </div>
       </div>
       <hr>
       <div class="row">
         <div class='col-sm-4'>
-          <button class="btn btn-primary" (click)="addEqipment()">Add Equipment</button>
+          <button class="btn btn-primary" type="submit">Add Equipment</button>
         </div>
         <div class='col-sm-4'>
           <button class="btn btn-primary" (click)="cancelEqipment()">Cancel</button>
         </div>
         <div class='col-sm-4'>
-          <button class="btn btn-primary" (click)="resetEqipment()">Reset</button>
+          <button class="btn btn-primary" type= "reset">Reset</button>
         </div>
       </div>
     </form>

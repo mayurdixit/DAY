@@ -36,14 +36,15 @@ public class InventoryController {
     private KendraInfoService kendraInfoService;
 
     @RequestMapping(value = "/internal/add_inventory", method = RequestMethod.POST)
-    public void addInventory(@RequestBody InventoryData inventoryData) {
+    public Inventory addInventory(@RequestBody Inventory inventoryData) {
         System.out.println("parameters = " + inventoryData);
-        Inventory inventory = inventoryData.getInventory();
+        //Inventory inventory = inventoryData.getInventory();
         Date currDate = new Date();
-        inventory.setCreatedOn(currDate);
-        inventory.setLastUpdatedOn(currDate);
-        inventoryService.addInventory(inventory);
-        System.out.println("generate ID = " + inventory.getId());
+        inventoryData.setCreatedOn(currDate);
+        inventoryData.setLastUpdatedOn(currDate);
+        inventoryService.addInventory(inventoryData);
+        System.out.println("generate ID = " + inventoryData.getId());
+        return inventoryData;
     }
 
     @RequestMapping(value = "/internal/update_inventory", method = RequestMethod.POST)
@@ -59,6 +60,10 @@ public class InventoryController {
     public void deleteInventory(@PathVariable String id) {
         inventoryService.deleteInventory(id);
         return;
+    }
+    @RequestMapping(value = "/internal/inventory/{id}", method = RequestMethod.GET)
+    public Optional<Inventory> getEquipmentInfo(@PathVariable String id) {
+        return inventoryService.getInvntoryRecord(id);
     }
 
     @RequestMapping(value = "/internal/kendra_inventory/{id}", method = RequestMethod.GET)

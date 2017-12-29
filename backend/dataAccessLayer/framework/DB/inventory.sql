@@ -5,7 +5,7 @@
 CREATE TABLE parth_preeti.inventory
 (
     id integer NOT NULL DEFAULT nextval('parth_preeti.inventory_id_seq'::regclass),
-    name text COLLATE pg_catalog."default" NOT NULL,
+    equipment_type numeric NOT NULL,
     serial_model_number text COLLATE pg_catalog."default",
     in_use boolean NOT NULL,
     purchased_on date,
@@ -22,6 +22,7 @@ CREATE TABLE parth_preeti.inventory
     contact2_name text COLLATE pg_catalog."default",
     contact2_phone text COLLATE pg_catalog."default",
     contact2_email text COLLATE pg_catalog."default",
+    owned_by text COLLATE pg_catalog."default",
     CONSTRAINT inventory_pkey PRIMARY KEY (id)
 )
 WITH (

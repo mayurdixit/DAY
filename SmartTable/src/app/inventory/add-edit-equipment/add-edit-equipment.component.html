@@ -18,9 +18,16 @@
         <div class='col-sm-4'>
           <label for="type"> Equipment Type </label>
         </div>
-        <div class='col-sm-6' [ngClass]="{'has-error': f.submitted && !equipmentName.valid}">
+        <div class='col-sm-6'>
+          <select class="selectpicker" name="type" [(ngModel)]="selectedEquipmentType" >
+            <option *ngFor="let equipmentType of inventoryService.getEquipmentTypes(); let i = index" value={{equipmentType.id}}>
+              {{equipmentType.name}}
+            </option>
+          </select>
+          <!--
           <input type="text" id="type" name="equipmentName" [(ngModel)]="model.equipmentName" #equipmentName="ngModel" required>
           <div *ngIf="f.submitted && !equipmentName.valid" class="help-block">Equipment name is required</div>
+          -->
         </div>
       </div>
       <div class="form-group row">
@@ -45,7 +52,20 @@
           <label for="purchasedOn"> Purchased on </label>
         </div>
         <div class='col-sm-6'>
-          <input type="text" id="purchasedOn" name="purchasedOn" [(ngModel)]="model.purchasedOn" #purchasedOn="ngModel" placeholder="yyyy-mm-dd">
+          <input type="date" id="purchasedOn" name="purchasedOn" [(ngModel)]="model.purchasedOn" #purchasedOn="ngModel">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class='col-sm-4'>
+          <label for="ownedBy"> Owned by </label>
+        </div>
+        <div class='col-sm-6'>
+          <select class="selectpicker" name="ownedBy" [(ngModel)]="selectedOwnedBy" required>
+            <option *ngFor="let ownedBy of ownedByList.getOwnedBy(); let i=index" value={{ownedBy}}>
+              {{ownedBy}}
+            </option>
+            </select>
+            <div *ngIf="f.submitted && selectedOwnedBy==null" class="help-block">Owned by is required</div>
         </div>
       </div>
       <div class="form-group row">
@@ -115,14 +135,16 @@
       </div>
       <hr>
       <div class="row">
-        <div class='col-sm-4'>
-          <button class="btn btn-primary" type="submit">Add Equipment</button>
+        <div [ngClass]="{'col-sm-4':equipmentId == null, 'col-sm-6':equipmentId !== null}">
+          <button class="btn btn-primary" type="submit">Save</button>
         </div>
-        <div class='col-sm-4'>
+        <div [ngClass]="{'col-sm-4':equipmentId == null, 'col-sm-6':equipmentId !== null}">
           <button class="btn btn-primary" (click)="cancelEqipment()">Cancel</button>
         </div>
         <div class='col-sm-4'>
-          <button class="btn btn-primary" type= "reset">Reset</button>
+            <div *ngIf="equipmentId == null">
+          <button class="btn btn-primary" type="reset">Reset</button>
+          </div>
         </div>
       </div>
     </form>

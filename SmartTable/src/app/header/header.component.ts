@@ -20,4 +20,9 @@ export class HeaderComponent implements OnInit {
     console.log(this.currentUser.applicationList);
   }
   ngOnInit() {}
+
+  appRedirection(id: string){
+    console.log("appRedirection called id=" + id);
+    localStorage.setItem("selectedApp", id);
+  }
 }

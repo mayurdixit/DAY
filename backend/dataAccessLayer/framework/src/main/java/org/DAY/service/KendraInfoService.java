@@ -15,6 +15,7 @@ import java.util.Optional;
 
 import org.DAY.db.entity.KendraInfo;
 import org.DAY.repository.IKendraInfoRepository;
+import org.DAY.utility.IConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class KendraInfoService {
+public class KendraInfoService implements IConstants{
 
     @Autowired
     IKendraInfoRepository kendraInfoRepository;
@@ -40,7 +41,11 @@ public class KendraInfoService {
 
     public List<KendraInfo> getChildKendraInfo(int kendraId){
         List<KendraInfo> childKendraInfo = new ArrayList<>();
-        kendraInfoRepository.findByParent(kendraId).forEach(childKendraInfo::add);
+        if(kendraId == MADHAVKENDRA){
+            kendraInfoRepository.findAll().forEach(childKendraInfo::add);
+        } else {
+            kendraInfoRepository.findByParent(kendraId).forEach(childKendraInfo::add);
+        }
         return childKendraInfo;
     }
 }

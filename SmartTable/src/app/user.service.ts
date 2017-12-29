@@ -15,6 +15,7 @@ export class UserService {
 
   //private authenticateUserURL = 'http://localhost:8888/authorize';
   private authenticateUserURL = "../internal/authorize";
+  private allUsersForAppZoneURL = "../internal/user-by-app";
 
   constructor(private http: HttpClient, private router: Router) {
     let stringifyAclObj = localStorage.getItem('currentUser');
@@ -46,6 +47,24 @@ export class UserService {
 
   isUserLoggedIn() {
     return localStorage.getItem('currentUser') != null;
+  }
+
+  getAllUsersForAppZone(appId: number, zoneId: number){
+    let headers = new HttpHeaders();
+    headers.set('Access-Control-Allow-Origin', this.authenticateUserURL);
+    headers.append('Access-Control-Allow-Credentials', 'true');
+    headers.append('Content-type', 'application/json');
+
+    let requestBody = { "appId": appId, "zoneId": zoneId };
+    console.log("body=" + requestBody);
+
+    return this.http.post(this.allUsersForAppZoneURL, requestBody, {
+      headers: headers,
+    })
+      .map(response => {
+        console.log("response=" + response);       
+        return response;
+      })    
   }
 
   authenticateUser(userdata: String, psword: String) {

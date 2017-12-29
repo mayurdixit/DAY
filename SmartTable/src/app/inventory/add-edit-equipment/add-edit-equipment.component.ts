@@ -3,7 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { InventoryService } from '../../inventory.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
-import { EquipmentInfo } from '../EquipmentInfo';
+import { EquipmentInfo } from '../../models/equipment-info';
+import { InventoryOwnedBy } from '../../models/inventory-owned-by';
 
 @Component({
   selector: 'app-add-edit-equipment',
@@ -17,7 +18,10 @@ export class AddEditEquipmentComponent implements OnInit {
   private selectedKendraName;
   private user;
   private equipmentInfo: EquipmentInfo = new EquipmentInfo();
+  private ownedByList: InventoryOwnedBy = new InventoryOwnedBy();
   private equipmentId: number;
+  private selectedEquipmentType;
+  private selectedOwnedBy;
 
   model: any = {};
 
@@ -32,6 +36,7 @@ export class AddEditEquipmentComponent implements OnInit {
     if(this.equipmentId != null){
       this.getEquipmentInfo();
     }
+    console.log(inventoryService.getEquipmentTypes());
   }
 
   ngOnInit() {
@@ -43,17 +48,63 @@ export class AddEditEquipmentComponent implements OnInit {
 
   getEquipmentInfo(){
     console.log("getEquipmentInfo called");
-    var equipmentData = this.inventoryService.getEquipmentInfo(this.equipmentId);
-    console.log(equipmentData);
+    this.inventoryService.getEquipmentInfo(this.equipmentId).subscribe(
+      data=>{        
+        console.log(data);
+        this.updateModel(data)
+      },
+      error=>{
+        console.log("got error");
+        this.alertService.error(error);
+      }
+    );
+    console.log("EquipmentData to be updated=");
+    //console.log(equipmentData);
+  }
+
+  getFormatedPurchaseDate(inputDate: Date){
+    let tempDate: Date = new Date(inputDate);
+    let year = tempDate.getFullYear();
+    let day = tempDate.getDate();
+    let month = tempDate.getMonth();
+    month = month+1;
+    let returnDate = year + "-" + month + "-" + day;
+    console.log("returnDate = " + returnDate);
+    return returnDate;
+  }
+
+  updateModel(data: any){    
+    this.model.equipmentName = data.name;
+    this.selectedEquipmentType = data.name;
+    this.model.serialNumber = data.serialModelNumber;
+    this.model.inUse = data.inUse;        
+    this.model.purchasedOn = this.getFormatedPurchaseDate(data.purchasedOn);
+    this.selectedOwnedBy = data.ownedBy;
+    this.model.userSince = data.usedSince;
+    this.model.storedAt = data.storedAt;
+    this.model.comments = data.comment;
+    this.model.contact1 = data.contact1_name;
+    this.model.contact1Phone = data.contact1_phone;
+    this.model.contact1Email = data.contact1_email;
+    this.model.contact2 = data.contact2_name;
+    this.model.contact2Phone = data.contact2_phone;
+    this.model.contact2Email = data.contact2_email;
+    console.log("data.createdOn:" + data.createdOn);
+    this.model.createdOn = data.createdOn;
+    this.model.id = data.id;
   }
 
   addEquipment() {
     console.log('add equipment');
     console.log(this.model.equipmentName);
-    this.equipmentInfo.setName(this.model.equipmentName);
+    var newpurchasedOn: Date = new Date(this.model.purchasedOn);
+    newpurchasedOn.setDate(newpurchasedOn.getDate() + 1);
+    console.log("Purchased on ************ = " + newpurchasedOn);
+    this.equipmentInfo.setName(this.selectedEquipmentType);
     this.equipmentInfo.setSerialModelNumber(this.model.serialNumber);
     this.equipmentInfo.setInUse(this.model.inUse);
-    this.equipmentInfo.setPurchasedOn(this.model.purchasedOn);
+    this.equipmentInfo.setPurchasedOn(newpurchasedOn);
+    this.equipmentInfo.setOwnedBy(this.selectedOwnedBy);
     this.equipmentInfo.setUsedSince(this.model.userSince);
     this.equipmentInfo.setStoredAt(this.model.storedAt);
     this.equipmentInfo.setKendraId(this.inventoryService.getSelectedKendraId());
@@ -65,6 +116,8 @@ export class AddEditEquipmentComponent implements OnInit {
     this.equipmentInfo.setContact2_name(this.model.contact2);
     this.equipmentInfo.setContact2_phone(this.model.contact2Phone);
     this.equipmentInfo.setContact2_email(this.model.contact2Email);
+    this.equipmentInfo.setCreatedOn(this.model.createdOn);
+    this.equipmentInfo.setId(this.model.id);
     
     console.log(this.equipmentInfo);
     this.inventoryService.saveEquipment(this.equipmentInfo).subscribe(

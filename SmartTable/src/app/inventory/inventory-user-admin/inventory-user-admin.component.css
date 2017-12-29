@@ -1,0 +1,5 @@
+.well.custom-well-small {width: 800px; margin:0 auto;}
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+	background-color: #f9a777;
+}

@@ -1,12 +1,3 @@
-/********************************************************************************
- * Copyright (c) 2015-2016 GE Digital. All rights reserved.                     *
- *                                                                              *
- * The copyright to the computer software herein is the property of GE Digital. *
- * The software may be used and/or copied only with the written permission of   *
- * GE Digital or in accordance with the terms and conditions stipulated in the  *
- * agreement/contract under which the software has been supplied.               *
- ********************************************************************************/
-
 package org.DAY.inventory.entity;
 
 import javax.persistence.*;
@@ -19,7 +10,7 @@ public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    private int equipmentType;
     private String serialModelNumber;
     private boolean inUse;
     private Date purchasedOn;
@@ -36,6 +27,7 @@ public class Inventory {
     private String contact2_name;
     private String contact2_phone;
     private String contact2_email;
+    private String ownedBy;
 
     public int getId() {
         return id;
@@ -45,12 +37,12 @@ public class Inventory {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getName() {
+        return equipmentType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(int equipmentType) {
+        this.equipmentType = equipmentType;
     }
 
     public String getSerialModelNumber() {
@@ -181,27 +173,36 @@ public class Inventory {
         this.contact2_email = contact2_email;
     }
 
+    public String getOwnedBy() {
+        return ownedBy;
+    }
+
+    public void setOwnedBy(String ownedBy) {
+        this.ownedBy = ownedBy;
+    }
+
     @Override
     public String toString() {
         return "Inventory{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", serialModelNumber='" + serialModelNumber + '\'' +
-            ", inUse=" + inUse +
-            ", purchasedOn=" + purchasedOn +
-            ", usedSince=" + usedSince +
-            ", storedAt='" + storedAt + '\'' +
-            ", kendraId=" + kendraId +
-            ", comment='" + comment + '\'' +
-            ", createdOn=" + createdOn +
-            ", lastUpdatedOn=" + lastUpdatedOn +
-            ", updatedBy=" + updatedBy +
-            ", contact1_name='" + contact1_name + '\'' +
-            ", contact1_phone='" + contact1_phone + '\'' +
-            ", contact1_email='" + contact1_email + '\'' +
-            ", contact2_name='" + contact2_name + '\'' +
-            ", contact2_phone='" + contact2_phone + '\'' +
-            ", contact2_email='" + contact2_email + '\'' +
-            '}';
+                "id=" + id +
+                ", equipmentType=" + equipmentType +
+                ", serialModelNumber='" + serialModelNumber + '\'' +
+                ", inUse=" + inUse +
+                ", purchasedOn=" + purchasedOn +
+                ", usedSince=" + usedSince +
+                ", storedAt='" + storedAt + '\'' +
+                ", kendraId=" + kendraId +
+                ", comment='" + comment + '\'' +
+                ", createdOn=" + createdOn +
+                ", lastUpdatedOn=" + lastUpdatedOn +
+                ", updatedBy=" + updatedBy +
+                ", contact1_name='" + contact1_name + '\'' +
+                ", contact1_phone='" + contact1_phone + '\'' +
+                ", contact1_email='" + contact1_email + '\'' +
+                ", contact2_name='" + contact2_name + '\'' +
+                ", contact2_phone='" + contact2_phone + '\'' +
+                ", contact2_email='" + contact2_email + '\'' +
+                ", ownedBy='" + ownedBy + '\'' +
+                '}';
     }
 }

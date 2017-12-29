@@ -17,6 +17,7 @@ import { AuthguardGuard } from './authguard.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './alert/alert.component';
 import { AddEditEquipmentComponent } from './inventory/add-edit-equipment/add-edit-equipment.component';
+import { InventoryUserAdminComponent } from './inventory/inventory-user-admin/inventory-user-admin.component';
 
 const appRoutes: Routes =[
   {
@@ -32,6 +33,11 @@ const appRoutes: Routes =[
     path: 'inventory/add-equipment',
     canActivate: [AuthguardGuard],
     component: AddEditEquipmentComponent
+  },
+  {
+    path: 'inventory/users-admin',
+    canActivate: [AuthguardGuard],
+    component: InventoryUserAdminComponent
   },
   {
     path: 'home',
@@ -52,7 +58,8 @@ const appRoutes: Routes =[
     LoginFormComponent,
     HeaderComponent,
     AlertComponent,
-    AddEditEquipmentComponent
+    AddEditEquipmentComponent,
+    InventoryUserAdminComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

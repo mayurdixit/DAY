@@ -24,4 +24,7 @@ public interface IUserAppRoleRepository extends CrudRepository<UserAppRole, Inte
 
     @Query("SELECT uar from UserAppRole uar where uar.userId = :id")
     List<UserAppRole> findByUserId(int id);
+
+    @Query("SELECT uar from UserAppRole uar where uar.appId = :id")
+    List<UserAppRole> getAppRoleByApp(int id);
 }

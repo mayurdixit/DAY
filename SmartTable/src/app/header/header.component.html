@@ -5,13 +5,13 @@
       </div>
       <ul class="nav navbar-nav">     
             <li class="active" *ngFor="let application of currentUser.applicationList; let i=index">
-              <a routerLink="{{application.appUrl}}">{{application.name}}</a>
+              <a routerLink="{{application.appUrl}}" (click)="appRedirection(application.id)">{{application.name}}</a>
             </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">  
         <div *ngIf="user.isUserLoggedIn(); then logout else login"></div>              
         <ng-template #login><li class="active"><a href="/login" nav><span class="glyphicon glyphicon-log-in"></span> Login</a></li></ng-template>          
-        <ng-template #logout><li class="active"><a href="/login" nav><span class="glyphicon glyphicon-log-in"></span> Logout</a></li></ng-template>     
+        <ng-template #logout><li class="active"><a href="/login" nav data-toggle="tooltip" title="Logout {{currentUser.userName}}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li></ng-template>     
       </ul>   
   </div>
 </nav> 

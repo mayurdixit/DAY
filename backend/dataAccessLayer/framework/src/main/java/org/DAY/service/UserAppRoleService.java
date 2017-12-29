@@ -27,4 +27,7 @@ public class UserAppRoleService {
     public List<UserAppRole> getAppRoleByForUser(int userId){
         return userAppRoleRepository.findByUserId(userId);
     }
+    public List<UserAppRole> getAppRoleByApp(int appId){
+        return userAppRoleRepository.getAppRoleByApp(appId);
+    }
 }

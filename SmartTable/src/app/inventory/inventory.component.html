@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="well well-sm custom-well-small">
     <div class="row ">
-        <div [ngClass]="{'col-sm-3':currentUser.accessRole.id === 2, 'col-sm-4': currentUser.accessRole.id !== 2}">
+        <div [ngClass]="{'col-sm-3':currentUser.accessRole.id !== accessRole.KENDRA_ROLE, 'col-sm-4': currentUser.accessRole.id === accessRole.KENDRA_ROLE}">
         <span class="label label-default">Zone</span>
         <select class="selectpicker" [(ngModel)]="selectedZoneId" (change)="zoneChange($event)">
             <option *ngFor="let zone of currentUser.zoneInfoList; let i = index" value={{zone.id}}>
@@ -10,19 +10,19 @@
             </option>
           </select>
       </div>
-      <div [ngClass]="{'col-sm-3':currentUser.accessRole.id === 2, 'col-sm-4': currentUser.accessRole.id !== 2}">
+      <div [ngClass]="{'col-sm-3':currentUser.accessRole.id !== accessRole.KENDRA_ROLE, 'col-sm-4': currentUser.accessRole.id === accessRole.KENDRA_ROLE}">
           <span class="label label-default">Kendra</span>
-        <select class="selectpicker" [(ngModel)]="selectedKendraId" (change)="kendraChange($event)">
-            Kendra:<option *ngFor="let kendraInfo of currentUser.kendraInfoList; let i = index" value={{kendraInfo.id}}>
+        <select class="selectpicker" [(ngModel)]="selectedKendraId" (change)="kendraChange($event)">          
+            Kendra:<option *ngFor="let kendraInfo of getKendraInfoList(); let i = index" value={{kendraInfo.id}}>
             {{kendraInfo.name}}
           </option>
         </select>
       </div>
-      <div [ngClass]="{'col-sm-3':currentUser.accessRole.id === 2, 'col-sm-4': currentUser.accessRole.id !== 2}">
+      <div [ngClass]="{'col-sm-3':currentUser.accessRole.id !== accessRole.KENDRA_ROLE, 'col-sm-4': currentUser.accessRole.id === accessRole.KENDRA_ROLE}">
         <button class="btn btn-primary" (click)="getInventory()">Show Inventory</button>
       </div>
-      <div class="col-sm-3" *ngIf="currentUser.accessRole.id === 2">
-        <button class="btn btn-primary">Users</button>
+      <div class="col-sm-3" *ngIf="currentUser.accessRole.id !== accessRole.KENDRA_ROLE">
+        <button class="btn btn-primary" (click)="getUsersInfo()">Users</button>
       </div>
     </div>
   </div>
@@ -33,10 +33,12 @@
       <thead>
         <tr>
           <th></th>
+          <th></th>
           <th>Equipment-Name</th>
           <th>Serial-Model-#</th>
           <th>inUse</th>
           <th>Purchased on</th>
+          <th>Owned By</th>
           <th>Used since</th>
           <th>Stored at</th>
           <th>Kendar</th>
@@ -47,16 +49,20 @@
           <th>contact2 Name</th>
           <th>contact2 phone#</th>
           <th>contact2 Email</th>
+          <th>Last Updated on</th>
         </tr>
         
       </thead>
       <tbody>
         <tr *ngFor="let equipmentInfo of inventoryService.getInventoryInfo(); let i=index">
-          <td><button type="button" class="btn btn-link" (click)="updateEquipment(equipmentInfo.inventory.id)">Edit </button></td>          
-          <td>{{equipmentInfo.inventory.name}}</td>
+            <!--(click)="deleteEquipment(equipmentInfo.inventory.id)"-->
+          <td><button type="button" class="btn btn-link" data-toggle="tooltip" title="Delete" (click)="deleteEquipment(equipmentInfo.inventory.id)"><span class="glyphicon glyphicon-remove"></span> </button></td> 
+          <td><button type="button" class="btn btn-link" data-toggle="tooltip" title="Edit" (click)="updateEquipment(equipmentInfo.inventory.id)"><span class="glyphicon glyphicon-pencil"></span> </button></td>          
+          <td>{{getEquipmentTypeName(equipmentInfo.inventory.name)}}</td>
           <td>{{equipmentInfo.inventory.serialModelNumber}}</td>
           <td>{{equipmentInfo.inventory.inUse}}</td>
-          <td>{{equipmentInfo.inventory.purchasedOn}}</td>
+          <td>{{equipmentInfo.inventory.purchasedOn| date: 'MM/dd/yyyy'}}</td>
+          <td>{{equipmentInfo.inventory.ownedBy}}</td>
           <td>{{equipmentInfo.inventory.usedSince}}</td>
           <td>{{equipmentInfo.inventory.storedAt}}</td>
           <td>{{equipmentInfo.kendraInfo.name}}</td>
@@ -66,10 +72,14 @@
           <td>{{equipmentInfo.inventory.contact1_email}}</td>
           <td>{{equipmentInfo.inventory.contact2_name}}</td>
           <td>{{equipmentInfo.inventory.contact2_phone}}</td>
-          <td>{{equipmentInfo.inventory.contact2_email}}</td>          
+          <td>{{equipmentInfo.inventory.contact2_email}}</td>      
+          <td>{{equipmentInfo.inventory.lastUpdatedOn| date:'MM/dd/yyyy'}}</td>    
         </tr>
         <tr>
-            <td><button type="button" class="btn btn-link" (click)="addEquipment()">Add </button></td>
+            <td><button type="button" class="btn btn-link" data-toggle="tooltip" title="Add" (click)="addEquipment()"><span class="glyphicon glyphicon-plus"></span> </button></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -88,5 +98,5 @@
       </tbody>
     </table>
   </div>
-  </div>
+  </div>  
 </div>

@@ -46,7 +46,8 @@ export class LoginFormComponent implements OnInit {
         },
         error => {
           console.log("got error");
-          this.alertService.error(error);
+          console.log(error);
+          this.alertService.error("UserName Password incorrect");
           this.loading = false;
         }
       );

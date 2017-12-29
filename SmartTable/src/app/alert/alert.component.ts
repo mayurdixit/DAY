@@ -16,11 +16,15 @@ export class AlertComponent implements OnDestroy {
   constructor(private alertService: AlertService ) {
     this.subscription = alertService.getMessage().subscribe(message => {      
       this.message = message;
-    });
+    });    
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  clearMessage(){
+    this.alertService.clearMessage();
   }
 
 }

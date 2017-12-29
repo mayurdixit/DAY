@@ -9,17 +9,18 @@
 
 package org.DAY.inventory.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.DAY.db.entity.KendraInfo;
+import org.DAY.inventory.entity.EquipmentType;
 import org.DAY.inventory.entity.Inventory;
+import org.DAY.inventory.service.EquipmentTypeService;
 import org.DAY.inventory.service.InventoryService;
 import org.DAY.inventory.utility.InventoryData;
 import org.DAY.service.KendraInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +36,9 @@ public class InventoryController {
     @Autowired
     private KendraInfoService kendraInfoService;
 
+    @Autowired
+    private EquipmentTypeService equipmentTypeService;
+
     @RequestMapping(value = "/internal/add_inventory", method = RequestMethod.POST)
     public Inventory addInventory(@RequestBody Inventory inventoryData) {
         System.out.println("parameters = " + inventoryData);
@@ -48,28 +52,38 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/internal/update_inventory", method = RequestMethod.POST)
-    public InventoryData updateInventory(@RequestBody InventoryData inventoryData) {
-        Inventory inventory = inventoryData.getInventory();
+    public Inventory updateInventory(@RequestBody Inventory inventoryData) {
         Date updateDate = new Date();
-        inventoryService.updateInventory(inventory, updateDate);
+        inventoryService.updateInventory(inventoryData, updateDate);
         return inventoryData;
     }
 
     @RequestMapping(value = "/internal/delete_inventory/{id}", method = RequestMethod.POST)
     @Transactional
-    public void deleteInventory(@PathVariable String id) {
+    public boolean deleteInventory(@PathVariable String id) {
         inventoryService.deleteInventory(id);
-        return;
+        return true;
     }
     @RequestMapping(value = "/internal/inventory/{id}", method = RequestMethod.GET)
-    public Optional<Inventory> getEquipmentInfo(@PathVariable String id) {
-        return inventoryService.getInvntoryRecord(id);
+    public Inventory getEquipmentInfo(@PathVariable String id) {
+        Inventory inventory = null;
+        Optional<Inventory> inventoryObservable = inventoryService.getInvntoryRecord(id);
+        if(inventoryObservable.isPresent()){
+            inventory = inventoryObservable.get();
+        }
+        return inventory;
+    }
+
+    @RequestMapping(value="/internal/all_equipment_types", method = RequestMethod.GET)
+    public List<EquipmentType> getAllEquipmentTypes(){
+        return  equipmentTypeService.getAllEquipmentType();
     }
 
     @RequestMapping(value = "/internal/kendra_inventory/{id}", method = RequestMethod.GET)
     public List<InventoryData> getKendraInventory(@PathVariable String id) {
         List<InventoryData> kendraInventory = new ArrayList<>();
         List<Inventory> inventoryList = inventoryService.getInventoryByKendra(id);
+        System.out.println("inventoryList length= " + inventoryList.size());
         inventoryList.forEach(inventory -> {
             InventoryData inventoryData = new InventoryData();
             KendraInfo kendraData = getKendraInfo(inventory.getKendraId());

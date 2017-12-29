@@ -1,10 +1,10 @@
-import { Data } from "@angular/router/src/config";
-
 export class EquipmentInfo {
+    private id;
     private name;
     private serialModelNumber;
     private inUse;
     private purchasedOn;
+    private ownedBy;
     private usedSince;
     private storedAt;
     private kendraId;
@@ -16,7 +16,10 @@ export class EquipmentInfo {
     private contact2_name;
     private contact2_phone;
     private contact2_email;
+    private createdOn;
 
+    getId(){ return this.id; }
+    setId(id: number){ this.id = id; }
     getName(){ return this.name; }
     setName(name: string){ this.name = name; }
     getSerialModelNumber(){ return this.serialModelNumber; }
@@ -25,8 +28,10 @@ export class EquipmentInfo {
     setInUse(inUse: boolean){ this.inUse = inUse; }
     getPurchasedOn(){ return this.purchasedOn; }
     setPurchasedOn(purchasedOn: Date){ this.purchasedOn = purchasedOn; }
+    getOwnedBy(){ return this.ownedBy; }
+    setOwnedBy(ownedBy: string){ this.ownedBy = ownedBy; }
     getUsedSince(){ return this.purchasedOn; }
-    setUsedSince(usedSince: Data){ this.usedSince = usedSince; }
+    setUsedSince(usedSince: Date){ this.usedSince = usedSince; }
     getStoredAt(){ return this.storedAt; }
     setStoredAt(storedAt: string){ this.storedAt = storedAt; }
     getKendraId(){ return this.kendraId; }
@@ -47,6 +52,6 @@ export class EquipmentInfo {
     setContact2_phone(phone: string){ this.contact2_phone = phone; }
     getContact2_email(){ this.contact2_email; }
     setContact2_email(email: string){ this.contact2_email = email; }
-
-
+    getCreatedOn(){ return this.createdOn; }
+    setCreatedOn(createdOn: Date) { this.createdOn = createdOn; }
 }

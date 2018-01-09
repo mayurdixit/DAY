@@ -10,7 +10,6 @@
 package org.DAY.db.entity;
 
 import java.util.Date;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +30,7 @@ public class User {
     private String first_name;
     private String last_name;
     private String contact_number;
-    private boolean enabled;
+    private boolean passwordReset;
     private Date created_on;
     private Date last_accessed_on;
     private String email;
@@ -70,12 +69,12 @@ public class User {
         this.contact_number = contact_number;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public boolean isPasswordReset() {
+        return passwordReset;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setPasswordReset(boolean passwordReset) {
+        this.passwordReset = passwordReset;
     }
 
     public Date getCreated_on() {
@@ -142,7 +141,7 @@ public class User {
             "first_name='" + first_name + '\'' +
             ", last_name='" + last_name + '\'' +
             ", contact_number='" + contact_number + '\'' +
-            ", enabled=" + enabled +
+            ", passwordReset=" + passwordReset +
             ", created_on=" + created_on +
             ", last_accessed_on=" + last_accessed_on +
             ", email='" + email + '\'' +

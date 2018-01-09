@@ -22,7 +22,7 @@ export class InventoryComponent implements OnInit {
   private selectedZoneId;
   private showInventoryData = false;
   private currentUser = null;
-  private accessRole: RoleMapping = new RoleMapping();
+  private roleMapping: RoleMapping = new RoleMapping();
   private ownedBy: InventoryOwnedBy = new InventoryOwnedBy();
   
   constructor(private router: Router,
@@ -33,7 +33,7 @@ export class InventoryComponent implements OnInit {
     console.log("In Inventory: " + this.user.isUserLoggedIn());    
     var stringifyCurrentUser = localStorage.getItem('currentUser');
     this.currentUser = JSON.parse(stringifyCurrentUser);
-    if(this.currentUser.accessRole.name === 'kendra'){
+    if(this.currentUser.accessRole.id === this.roleMapping.KENDRA_ROLE){
       this.setSelectedKendraForUser();
     }
     this.selectedKendraId = inventoryService.getSelectedKendraId();

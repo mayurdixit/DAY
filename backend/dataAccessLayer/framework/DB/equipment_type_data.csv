@@ -1,27 +1,27 @@
-id,name,description,created_on,last_updated_on
-1,TV,,2017-12-27,2017-12-27
-2,Projector,,2017-12-27,2017-12-27
-3,Projector Screen,,2017-12-27,2017-12-27
-4,SmpvNet Netbook / Media Player device,,2017-12-27,2017-12-27
-5,SmpvNet VGA Converter Switch,,2017-12-27,2017-12-27
-6,SmpvNet HDMI Cable,,2017-12-27,2017-12-27
-7,SmpvNet Audio Cable,,2017-12-27,2017-12-27
-8,SmpvNet SVGA cable,,2017-12-27,2017-12-27
-9,SmpvNet VGA Cable,,2017-12-27,2017-12-27
-10,UTP Extender Kit,,2017-12-27,2017-12-27
-11,Cat5e (Ethernet Cable),,2017-12-27,2017-12-27
-12,VGA with Audio Cable,,2017-12-27,2017-12-27
-13,VCR,,2017-12-27,2017-12-27
-14,DVD player,,2017-12-27,2017-12-27
-15,VCR-DVD Combo,,2017-12-27,2017-12-27
-16,RF modulator device,,2017-12-27,2017-12-27
-17,COAX cable,,2017-12-27,2017-12-27
-18,Wireless Transmiter/Reciever,,2017-12-27,2017-12-27
-19,Speakers - Powered,,2017-12-27,2017-12-27
-20,Cables for Speakers,,2017-12-27,2017-12-27
-21,Speaker stands,,2017-12-27,2017-12-27
-22,Audio Amplifire systems,,2017-12-27,2017-12-27
-23,Audio Mixer systems,,2017-12-27,2017-12-27
-24,Microphones - wired,,2017-12-27,2017-12-27
-25,Microphones - wireless,,2017-12-27,2017-12-27
-26,Other,,2017-12-27,2017-12-27
+name,description,created_on,last_updated_on
+TV,,12/27/2017,12/27/2017
+Projector,,12/27/2017,12/27/2017
+Projector Screen,,12/27/2017,12/27/2017
+SmpvNet Netbook / Media Player device,,12/27/2017,12/27/2017
+SmpvNet VGA Converter Switch,,12/27/2017,12/27/2017
+SmpvNet HDMI Cable,,12/27/2017,12/27/2017
+SmpvNet Audio Cable,,12/27/2017,12/27/2017
+SmpvNet SVGA cable,,12/27/2017,12/27/2017
+SmpvNet VGA Cable,,12/27/2017,12/27/2017
+UTP Extender Kit,,12/27/2017,12/27/2017
+Cat5e (Ethernet Cable),,12/27/2017,12/27/2017
+VGA with Audio Cable,,12/27/2017,12/27/2017
+VCR,,12/27/2017,12/27/2017
+DVD player,,12/27/2017,12/27/2017
+VCR-DVD Combo,,12/27/2017,12/27/2017
+RF modulator device,,12/27/2017,12/27/2017
+COAX cable,,12/27/2017,12/27/2017
+Wireless Transmiter/Reciever,,12/27/2017,12/27/2017
+Speakers - Powered,,12/27/2017,12/27/2017
+Cables for Speakers,,12/27/2017,12/27/2017
+Speaker stands,,12/27/2017,12/27/2017
+Audio Amplifire systems,,12/27/2017,12/27/2017
+Audio Mixer systems,,12/27/2017,12/27/2017
+Microphones - wired,,12/27/2017,12/27/2017
+Microphones - wireless,,12/27/2017,12/27/2017
+Other,,12/27/2017,12/27/2017

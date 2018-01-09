@@ -15,6 +15,7 @@ export class UserService {
 
   //private authenticateUserURL = 'http://localhost:8888/authorize';
   private authenticateUserURL = "../internal/authorize";
+  private resetPasswordURL = "../internal/change-password";
   private allUsersForAppZoneURL = "../internal/user-by-app";
 
   constructor(private http: HttpClient, private router: Router) {
@@ -65,6 +66,27 @@ export class UserService {
         console.log("response=" + response);       
         return response;
       })    
+  }
+
+  resetPassword(userName: String, oldPsword: String, newPsword: String){
+    var data = {};
+    
+    
+    let headers = new HttpHeaders();
+    headers.set('Access-Control-Allow-Origin', this.authenticateUserURL);
+    headers.append('Access-Control-Allow-Credentials', 'true');
+    headers.append('Content-type', 'application/json');
+
+    let requestBody = { "userName": userName, "oldPassword": oldPsword, "newPassword": newPsword };
+    console.log("body=" + requestBody);
+
+    return this.http.post(this.resetPasswordURL, requestBody, {
+      headers: headers,
+    })
+      .map(response => {
+        console.log("response=" + response);                
+        return response;
+      })     
   }
 
   authenticateUser(userdata: String, psword: String) {

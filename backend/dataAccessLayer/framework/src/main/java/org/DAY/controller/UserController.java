@@ -28,6 +28,7 @@ import org.DAY.service.UserService;
 import org.DAY.utility.ACLInfo;
 import org.DAY.utility.IConstants;
 import org.DAY.utility.Login;
+import org.DAY.utility.ResetPasswordData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -123,6 +124,37 @@ public class UserController implements IConstants{
         return listOfAppRoleUserData;
     }
 
+    @RequestMapping(value="/internal/change-password", method=RequestMethod.POST)
+    public ResponseEntity<?> changePassword(@RequestBody ResetPasswordData loginInfo){
+        System.out.println("In reset-password = " + loginInfo);
+        Login loginData = new Login();
+        loginData.setPassword(loginInfo.getOldPassword());
+        loginData.setUserName(loginInfo.getUserName());
+        User currentUser = isUserHasAccess(loginData);
+        if(currentUser != null){
+            currentUser.setPassword(loginInfo.getNewPassword());
+            currentUser.setPasswordReset(false);
+            userService.addUser(currentUser);
+        }else {
+            return new ResponseEntity<String>("Username or Password is incorrect", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(true, HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/internal/reset-password", method=RequestMethod.POST)
+    public ResponseEntity<?> resetPassword(@RequestBody Login loginInfo){
+        System.out.println("In reset-password = " + loginInfo);
+        User currentUser = isUserHasAccess(loginInfo);
+        if(currentUser != null){
+            currentUser.setPassword(currentUser.getDefault_password());
+            currentUser.setPasswordReset(true);
+            userService.addUser(currentUser);
+        }else {
+            return new ResponseEntity<String>("Username or Password is incorrect", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(true, HttpStatus.OK);
+    }
+
     @RequestMapping(value="/internal/authorize", method=RequestMethod.POST)
     public ResponseEntity<?> authorizeUser(@RequestBody Login formData){
         User retUser;
@@ -160,6 +192,7 @@ public class UserController implements IConstants{
             } else {
                 return new ResponseEntity<String>("Username or Password is incorrect", HttpStatus.BAD_REQUEST);
             }
+            aclInfo.generateToken();
         return new ResponseEntity(aclInfo, HttpStatus.OK);
         }
 
@@ -171,8 +204,10 @@ public class UserController implements IConstants{
 
         if(childKendraList.size() > 0) {
             System.out.println("It's a zone");
-            aclInfo.getZoneInfoList().add(currKendraInfo);
-            addedZoneIdList.add(currKendraInfo.getId());
+            if(!addedZoneIdList.contains(currKendraInfo.getId())) {
+                aclInfo.getZoneInfoList().add(currKendraInfo);
+                addedZoneIdList.add(currKendraInfo.getId());
+            }
             System.out.println("after adding zoneIdList = " + addedZoneIdList.toString());
             childKendraList.forEach(childKendra ->{
                 if(childKendra.getId() != MADHAVKENDRA) {

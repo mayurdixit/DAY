@@ -1,5 +1,5 @@
 export class RoleMapping {
-    public KENDRA_ROLE=5;
-    public ZONAL_ROLE=6;
-    public INVENTORY_ADMIN_ROLE=7;
+    public KENDRA_ROLE=1;
+    public ZONAL_ROLE=2;
+    public INVENTORY_ADMIN_ROLE=3;
 }

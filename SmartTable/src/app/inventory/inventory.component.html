@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="well well-sm custom-well-small">
     <div class="row ">
-        <div [ngClass]="{'col-sm-3':currentUser.accessRole.id !== accessRole.KENDRA_ROLE, 'col-sm-4': currentUser.accessRole.id === accessRole.KENDRA_ROLE}">
+        <div [ngClass]="{'col-sm-3':currentUser.accessRole.id !== roleMapping.KENDRA_ROLE, 'col-sm-4': currentUser.accessRole.id === roleMapping.KENDRA_ROLE}">
         <span class="label label-default">Zone</span>
         <select class="selectpicker" [(ngModel)]="selectedZoneId" (change)="zoneChange($event)">
             <option *ngFor="let zone of currentUser.zoneInfoList; let i = index" value={{zone.id}}>
@@ -10,7 +10,7 @@
             </option>
           </select>
       </div>
-      <div [ngClass]="{'col-sm-3':currentUser.accessRole.id !== accessRole.KENDRA_ROLE, 'col-sm-4': currentUser.accessRole.id === accessRole.KENDRA_ROLE}">
+      <div [ngClass]="{'col-sm-3':currentUser.accessRole.id !== roleMapping.KENDRA_ROLE, 'col-sm-4': currentUser.accessRole.id === roleMapping.KENDRA_ROLE}">
           <span class="label label-default">Kendra</span>
         <select class="selectpicker" [(ngModel)]="selectedKendraId" (change)="kendraChange($event)">          
             Kendra:<option *ngFor="let kendraInfo of getKendraInfoList(); let i = index" value={{kendraInfo.id}}>
@@ -18,10 +18,10 @@
           </option>
         </select>
       </div>
-      <div [ngClass]="{'col-sm-3':currentUser.accessRole.id !== accessRole.KENDRA_ROLE, 'col-sm-4': currentUser.accessRole.id === accessRole.KENDRA_ROLE}">
+      <div [ngClass]="{'col-sm-3':currentUser.accessRole.id !== roleMapping.KENDRA_ROLE, 'col-sm-4': currentUser.accessRole.id === roleMapping.KENDRA_ROLE}">
         <button class="btn btn-primary" (click)="getInventory()">Show Inventory</button>
       </div>
-      <div class="col-sm-3" *ngIf="currentUser.accessRole.id !== accessRole.KENDRA_ROLE">
+      <div class="col-sm-3" *ngIf="currentUser.accessRole.id !== roleMapping.KENDRA_ROLE">
         <button class="btn btn-primary" (click)="getUsersInfo()">Users</button>
       </div>
     </div>

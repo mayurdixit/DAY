@@ -9,7 +9,11 @@
 
 package org.DAY.utility;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.DAY.db.entity.AccessRole;
@@ -23,10 +27,12 @@ import org.DAY.db.entity.User;
 public class ACLInfo {
     private int userId;
     private String userName;
+    private boolean resetPassword;
     private List<KendraInfo> zoneInfoList;
     private List<KendraInfo> kendraInfoList;
     private List<Applications> applicationList;
     private AccessRole accessRole;
+    private String authToken;
 
     public int getUserId() {
         return userId;
@@ -85,11 +91,47 @@ public class ACLInfo {
         this.accessRole = accessRole;
     }
 
+    public boolean isResetPassword() {
+        return resetPassword;
+    }
+
+    public void setResetPassword(boolean resetPassword) {
+        this.resetPassword = resetPassword;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
+
+    public void generateToken(){
+        Calendar calendar = new GregorianCalendar();
+        Long miliSec = calendar.getTimeInMillis();
+        int delayInMin = 30;
+
+        String stringToken = miliSec + "#" + delayInMin;
+        System.out.println("string token=" + stringToken);
+        try {
+            byte[] encodedToken = Base64.getEncoder().encode(stringToken.getBytes("utf-8"));
+            System.out.println("encoded token = " + new String(encodedToken, "utf-8"));
+            byte[] decodedToken = Base64.getDecoder().decode(encodedToken);
+            System.out.println("decoded token = " + new String(decodedToken, "utf-8"));
+
+        }catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public String toString() {
         return "ACLInfo{" +
             "userId=" + userId +
             ", userName='" + userName + '\'' +
+            ", resetPassword=" + resetPassword +
             ", zoneInfoList=" + zoneInfoList +
             ", kendraInfoList=" + kendraInfoList +
             ", applicationList=" + applicationList +
@@ -100,5 +142,8 @@ public class ACLInfo {
     public void populateUserInfo(User retUser) {
         setUserId(retUser.getId());
         setUserName(retUser.getUser_name());
+        setResetPassword(retUser.isPasswordReset());
     }
+
+
 }

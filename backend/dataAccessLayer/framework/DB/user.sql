@@ -11,10 +11,10 @@ CREATE TABLE parth_preeti."user"
     contact_number text COLLATE pg_catalog."default",
     created_on date,
     last_accessed_on date,
-    enabled boolean DEFAULT true,
+    password_reset boolean DEFAULT true,
     user_name text COLLATE pg_catalog."default" NOT NULL,
     password text COLLATE pg_catalog."default",
-    default_password text COLLATE pg_catalog."default",
+    default_password text COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 )
 WITH (

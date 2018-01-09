@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './alert/alert.component';
 import { AddEditEquipmentComponent } from './inventory/add-edit-equipment/add-edit-equipment.component';
 import { InventoryUserAdminComponent } from './inventory/inventory-user-admin/inventory-user-admin.component';
+import { ResetPasswordComponent } from './login-form/reset-password/reset-password.component';
 
 const appRoutes: Routes =[
   {
@@ -47,6 +48,10 @@ const appRoutes: Routes =[
   {
     path: 'login',
     component: LoginFormComponent
+  },
+  {
+    path: 'login/reset-password',
+    component: ResetPasswordComponent
   }
 ];
 
@@ -59,7 +64,8 @@ const appRoutes: Routes =[
     HeaderComponent,
     AlertComponent,
     AddEditEquipmentComponent,
-    InventoryUserAdminComponent
+    InventoryUserAdminComponent,
+    ResetPasswordComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

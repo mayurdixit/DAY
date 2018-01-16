@@ -30,6 +30,7 @@ import org.DAY.utility.IConstants;
 import org.DAY.utility.Login;
 import org.DAY.utility.ResetPasswordData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -192,8 +193,13 @@ public class UserController implements IConstants{
             } else {
                 return new ResponseEntity<String>("Username or Password is incorrect", HttpStatus.BAD_REQUEST);
             }
-            aclInfo.generateToken();
-        return new ResponseEntity(aclInfo, HttpStatus.OK);
+            String authToken = aclInfo.generateToken();
+
+        //HttpHeaders responseHeader = new HttpHeaders();
+        //responseHeader.set("DAYAuthToken", authToken);
+        aclInfo.setAuthToken(authToken);
+        ResponseEntity response = new ResponseEntity(aclInfo, HttpStatus.OK);
+        return response;
         }
 
     private void updateKendraZoneList(ACLInfo aclInfo, List<Integer> addedKendraIdList, List<Integer>

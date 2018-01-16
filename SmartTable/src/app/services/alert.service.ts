@@ -23,9 +23,19 @@ export class AlertService {
     this.subject.next({type: 'success', text: message});
   }
 
-  error(message: string, keepAfterNavigationChange = false){    
+  error(message: string, keepAfterNavigationChange = false, errorStatus = 0){ 
+    console.log("errorStatus = " + errorStatus);
+    var redirectToLogin = false;
+    if(errorStatus === 401){
+      message = "Session Timeout";
+      redirectToLogin = true;
+      keepAfterNavigationChange = true;
+    }   
     this.keepAfterNavigationChange = keepAfterNavigationChange;
     this.subject.next({type: 'error', text: message});
+    if(redirectToLogin === true){
+      this.router.navigate(['login']);
+    }    
   }
 
   getMessage(): Observable<any>{

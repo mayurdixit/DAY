@@ -19,6 +19,7 @@ export class LoginFormComponent implements OnInit {
   homeUrl = 'home';
   resetPasswordUrl = "login/reset-password";
 
+
  // constructor(private router:Router, private user:UserService) { 
   constructor(
     private user:UserService,
@@ -43,10 +44,11 @@ export class LoginFormComponent implements OnInit {
      this.loading = true;
       this.user.authenticateUser(username, password).subscribe(
         data => {
+          localStorage.setItem('currentUser', JSON.stringify(data)); 
           console.log("resetPassword = " + data.resetPassword);
           if(data.resetPassword === true){
             this.router.navigate([this.resetPasswordUrl]);
-          } else {
+          } else {                        
             this.router.navigate([this.homeUrl]);
           }
           

@@ -24,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,7 +81,11 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/internal/kendra_inventory/{id}", method = RequestMethod.GET)
-    public List<InventoryData> getKendraInventory(@PathVariable String id) {
+    public List<InventoryData> getKendraInventory(@RequestHeader(value="auth-token", defaultValue = "") String
+        authToken,
+        @PathVariable
+        String id) {
+        //System.out.println("authToken=" + authToken);
         List<InventoryData> kendraInventory = new ArrayList<>();
         List<Inventory> inventoryList = inventoryService.getInventoryByKendra(id);
         System.out.println("inventoryList length= " + inventoryList.size());

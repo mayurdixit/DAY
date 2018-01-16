@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from '../user.service';
 import { InventoryService } from '../inventory.service';
@@ -24,12 +24,19 @@ export class InventoryComponent implements OnInit {
   private currentUser = null;
   private roleMapping: RoleMapping = new RoleMapping();
   private ownedBy: InventoryOwnedBy = new InventoryOwnedBy();
-  
+  private resolverData: any;
+  private inventoryTable = [];
+  private sortType="";
+  private sortReverse="";
+  private searchFish=false;
+
   constructor(private router: Router,
     private user: UserService,
     private inventoryService: InventoryService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private activatedRoute: ActivatedRoute) {
 
+    this.resolverData = this.activatedRoute.snapshot.data;   
     console.log("In Inventory: " + this.user.isUserLoggedIn());    
     var stringifyCurrentUser = localStorage.getItem('currentUser');
     this.currentUser = JSON.parse(stringifyCurrentUser);
@@ -46,9 +53,53 @@ export class InventoryComponent implements OnInit {
   getInventory() {
     if (this.selectedKendraId != null) {
       console.log("Kendra Id = " + this.selectedKendraId);
-      this.inventoryService.getInventaryDataForKendra(this.selectedKendraId);
+      this.inventoryService.getInventaryDataForKendra(this.selectedKendraId).subscribe(
+        data=>{
+          console.log("inventoryInfo = " + JSON.stringify(data));
+          this.inventoryService.setInventoryInfo(data);
+          this.inventoryService.isInventoryDataAvailable = true;
+          this.createInventoryTable();
+        },
+        error=>{
+          console.log(error.status);
+          console.log(error);
+          this.alertService.error(error, true, error.status);
+        }
+      );  
       console.log("isInventoryDataAvailable=" + this.inventoryService.isInventoryDataAvailable)
     }
+  }
+
+  createInventoryTable(){    
+    this.inventoryTable = [];
+    var equipmentType= "";
+    this.sortType = "equipment_type";
+    this.sortReverse = false;
+
+    for(let equipmentInfo of this.inventoryService.getInventoryInfo()){
+      equipmentType = this.getEquipmentTypeName(equipmentInfo.inventory.name);
+      console.log("equipmentType= " + equipmentType);
+      var inventoryRecord = {
+      "equipment_type" : equipmentType,
+      "serialNumber" : equipmentInfo.inventory.serialModelNumber,
+      "inUse" : equipmentInfo.inventory.inUse,
+      "purchasedOn" : equipmentInfo.inventory.purchasedOn,
+      "ownedBy" : equipmentInfo.inventory.ownedBy,
+      "usedSince" : equipmentInfo.inventory.usedSince,
+      "storedAt" : equipmentInfo.inventory.storedAt,
+      "name" : equipmentInfo.kendraInfo.name,
+      "comment" : equipmentInfo.inventory.comment,
+      "contact1_name" : equipmentInfo.inventory.contact1_name,
+      "contact1_phone" : equipmentInfo.inventory.contact1_phone,
+      "contact1_email" : equipmentInfo.inventory.contact1_email,
+      "contact2_name" : equipmentInfo.inventory.contact2_name,
+      "contact2_phone" : equipmentInfo.inventory.contact2_phone,
+      "contact2_email" : equipmentInfo.inventory.contact2_email,
+      "lastUpdatedOn" : equipmentInfo.inventory.lastUpdatedOn
+      }
+      this.inventoryTable.push(inventoryRecord);
+    }
+    console.log("table = " + this.inventoryTable);
   }
 
   addEquipment() {

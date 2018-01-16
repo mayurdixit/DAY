@@ -107,7 +107,8 @@ public class ACLInfo {
         this.authToken = authToken;
     }
 
-    public void generateToken(){
+    public String generateToken(){
+        String generatedToken = null;
         Calendar calendar = new GregorianCalendar();
         Long miliSec = calendar.getTimeInMillis();
         int delayInMin = 30;
@@ -116,14 +117,27 @@ public class ACLInfo {
         System.out.println("string token=" + stringToken);
         try {
             byte[] encodedToken = Base64.getEncoder().encode(stringToken.getBytes("utf-8"));
-            System.out.println("encoded token = " + new String(encodedToken, "utf-8"));
+            generatedToken = new String(encodedToken, "utf-8");
+            System.out.println("encoded token = " + generatedToken);
             byte[] decodedToken = Base64.getDecoder().decode(encodedToken);
             System.out.println("decoded token = " + new String(decodedToken, "utf-8"));
 
         }catch(UnsupportedEncodingException e){
             e.printStackTrace();
         }
+        return generatedToken;
+    }
 
+    public String decodeToken(String encodedToken){
+        String decodedStringToken = null;
+        byte[] authToken = encodedToken.getBytes();
+        byte[] decodedToken = Base64.getDecoder().decode(authToken);
+        try {
+            decodedStringToken = new String(decodedToken, "utf-8");
+        } catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+        return  decodedStringToken;
     }
 
     @Override

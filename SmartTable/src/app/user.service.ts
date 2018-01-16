@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { RouteService } from './services/route.service';
 
 
 //return this.http.post('http://localhost:3000/adduser', JSON.stringify(data), options)
@@ -11,39 +12,40 @@ import { Router } from '@angular/router';
 @Injectable()
 export class UserService {
 
-  private aclObj;
+  //private aclObj;
+  private currentUser;
 
   //private authenticateUserURL = 'http://localhost:8888/authorize';
   private authenticateUserURL = "../internal/authorize";
   private resetPasswordURL = "../internal/change-password";
   private allUsersForAppZoneURL = "../internal/user-by-app";
 
-  constructor(private http: HttpClient, private router: Router) {
-    let stringifyAclObj = localStorage.getItem('currentUser');
-    this.aclObj = JSON.parse(stringifyAclObj);
-    console.log("User Service Constructor: " + this.aclObj);
+  constructor(private http: HttpClient, private router: Router, private myRouter: RouteService) {
+    let stringifyCurrentUser = localStorage.getItem('currentUser');
+    this.currentUser = JSON.parse(stringifyCurrentUser);
+    console.log("User Service Constructor: " + this.currentUser);
   }
 
 
   ngOnInit() {   }
 
   getZoneName() {
-    return this.aclObj.zoneInfo.name;
+    return this.currentUser.zoneInfo.name;
   }
 
   getKendraList() {
-    console.log(JSON.stringify(this.aclObj.kendraInfoList));
-    return this.aclObj.kendraInfoList;
+    console.log(JSON.stringify(this.currentUser.kendraInfoList));
+    return this.currentUser.kendraInfoList;
   }
 
   getZoneList() {
-    console.log(JSON.stringify(this.aclObj.kendraInfoList));
-    return this.aclObj.zoneInfoList;
+    console.log(JSON.stringify(this.currentUser.kendraInfoList));
+    return this.currentUser.zoneInfoList;
   }
 
   getApplicationList() {
-    console.log(JSON.stringify(this.aclObj.applicationList));
-    return this.aclObj.applicationList;
+    console.log(JSON.stringify(this.currentUser.applicationList));
+    return this.currentUser.applicationList;
   }
 
   isUserLoggedIn() {
@@ -59,13 +61,14 @@ export class UserService {
     let requestBody = { "appId": appId, "zoneId": zoneId };
     console.log("body=" + requestBody);
 
-    return this.http.post(this.allUsersForAppZoneURL, requestBody, {
-      headers: headers,
-    })
-      .map(response => {
-        console.log("response=" + response);       
-        return response;
-      })    
+    return this.myRouter.doPost(this.allUsersForAppZoneURL, requestBody, headers);
+    // return this.http.post(this.allUsersForAppZoneURL, requestBody, {
+    //   headers: headers,
+    // })
+    //   .map(response => {
+    //     console.log("response=" + response);       
+    //     return response;
+    //   })    
   }
 
   resetPassword(userName: String, oldPsword: String, newPsword: String){
@@ -80,13 +83,14 @@ export class UserService {
     let requestBody = { "userName": userName, "oldPassword": oldPsword, "newPassword": newPsword };
     console.log("body=" + requestBody);
 
-    return this.http.post(this.resetPasswordURL, requestBody, {
-      headers: headers,
-    })
-      .map(response => {
-        console.log("response=" + response);                
-        return response;
-      })     
+    return this.myRouter.doPost(this.resetPasswordURL, requestBody,headers);
+    // return this.http.post(this.resetPasswordURL, requestBody, {
+    //   headers: headers,
+    // })
+    //   .map(response => {
+    //     console.log("response=" + response);                
+    //     return response;
+    //   })     
   }
 
   authenticateUser(userdata: String, psword: String) {
@@ -103,21 +107,15 @@ export class UserService {
     let requestBody = { "userName": userdata, "password": psword };
     console.log("body=" + requestBody);
 
-    return this.http.post(this.authenticateUserURL, requestBody, {
-      headers: headers,
-    })
-      .map(response => {
-        console.log("response=" + response);
-        this.aclObj = response;
-        //let kendraList = this.getKendraList();
-        //console.log("response lenght=" + kendraList.length);
-        localStorage.setItem('currentUser', JSON.stringify(this.aclObj));
-        //if (kendraList.length > 0) {
-        //  this.router.navigate(['inventory']);
+    return this.myRouter.doPost(this.authenticateUserURL, requestBody, headers);
 
-        //}
-        return response;
-      })     
+    // return this.http.post(this.authenticateUserURL, requestBody, {
+    //   headers: headers,
+    // })
+    //   .map((response: Response) => {
+    //     console.log("response=" + JSON.stringify(response));                     
+    //     return response;
+    //   })     
   }
 
   logout() {

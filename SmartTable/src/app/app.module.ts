@@ -19,6 +19,8 @@ import { AlertComponent } from './alert/alert.component';
 import { AddEditEquipmentComponent } from './inventory/add-edit-equipment/add-edit-equipment.component';
 import { InventoryUserAdminComponent } from './inventory/inventory-user-admin/inventory-user-admin.component';
 import { ResetPasswordComponent } from './login-form/reset-password/reset-password.component';
+import { RouteService } from './services/route.service';
+import { InventoryResolver } from './inventory/inventory-resolver';
 
 const appRoutes: Routes =[
   {
@@ -28,7 +30,8 @@ const appRoutes: Routes =[
   {
     path: 'inventory',
     canActivate: [AuthguardGuard],
-    component: InventoryComponent
+    component: InventoryComponent,
+    resolve: { message: InventoryResolver}
   },
   {
     path: 'inventory/add-equipment',
@@ -74,7 +77,7 @@ const appRoutes: Routes =[
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [UserService, AuthguardGuard, InventoryService, AlertService],
+  providers: [UserService, AuthguardGuard, InventoryService, AlertService, RouteService, InventoryResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
